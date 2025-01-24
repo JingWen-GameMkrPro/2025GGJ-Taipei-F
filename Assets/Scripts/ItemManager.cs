@@ -1,5 +1,8 @@
+using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class ItemManager : MonoBehaviour
 {
@@ -24,7 +27,8 @@ public class ItemManager : MonoBehaviour
         Bubble = 0
     }
 
-    //public GameObject ItemManagerPrefab;
+    List<(GameObject, ItemBehavior, ItemType)> AllItems = new();
+
     public GameObject BubblePrefab;
 
     public GameObject Create(ItemType type)
@@ -32,15 +36,27 @@ public class ItemManager : MonoBehaviour
         switch(type)
         {
             case ItemType.Bubble:
-                return Instantiate(BubblePrefab);
+                var instance = Instantiate(BubblePrefab);
+                AllItems.Add((instance, instance.GetComponent<ItemBehavior>(), ItemType.Bubble));
+                return instance;
             default:
                 return null;
         }
     }
 
-    //使用道具
-    public void Invoke()
-    {
 
+    public void Invoke(GameObject target)
+    {
+        foreach (var item in AllItems)
+        {
+            if(item.Item1 == target)
+            {
+                Debug.Log($"{target.name} is in the list.");
+                item.Item2.Shoot(Vector2.right, 10f);
+                return;
+            }
+        }
+
+        Debug.LogError("This Item is not existing！");
     }
 }
