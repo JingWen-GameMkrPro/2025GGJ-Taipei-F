@@ -42,8 +42,6 @@ public class ItemBehavior: MonoBehaviour
         }
 
         Destroy(this.gameObject);
-
-
     }
 
     public void Bounce()
@@ -54,6 +52,12 @@ public class ItemBehavior: MonoBehaviour
     public void Block()
     {
         Destroy(this.gameObject);
+    }
+
+    public void Reback(int newPlayerIndex)
+    {
+        ItemInfo.PlayerIndex = newPlayerIndex;
+        RB.linearVelocity = -RB.linearVelocity;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
