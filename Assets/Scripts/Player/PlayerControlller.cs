@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour {
             return;
         }
 
-        data = new PlayerData(playerInput.devices[0], indexCount++);
+        data = new PlayerData(playerInput.devices[0], indexCount++, this);
 
         spriteRenderer.material = playerMat[data.index];
 
@@ -98,6 +98,10 @@ public class PlayerController : MonoBehaviour {
             //data.device.ResetHaptics();
         }
     }
+
+    public PlayerData GetData() {
+        return data;
+    }
 }
 
 public class PlayerData{
@@ -107,11 +111,15 @@ public class PlayerData{
     public int speed;
     public bool canMove;
 
-    public PlayerData(InputDevice device, int index) {
+    //GameObject
+    public PlayerController playerController;
+
+    public PlayerData(InputDevice device, int index, PlayerController playerController) {
         this.device = device;
         this.index = index;
         this.hp = 100;
         this.speed = 5;
         this.canMove = true;
+        this.playerController = playerController;
     }
 }
