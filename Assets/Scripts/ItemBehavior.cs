@@ -34,6 +34,16 @@ public class ItemBehavior: MonoBehaviour
         }
     }
 
+    public void Bounce()
+    {
+        //¤Ï¼u
+        RB.linearVelocity = -RB.linearVelocity; 
+    }
+    public void Block()
+    {
+        Destroy(this.gameObject);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var collisionTag = collision.gameObject.tag;
