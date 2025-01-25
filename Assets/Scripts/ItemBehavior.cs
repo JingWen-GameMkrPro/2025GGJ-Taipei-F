@@ -58,6 +58,8 @@ public class ItemBehavior: MonoBehaviour
     public void Reback(PlayerController target)
     {
         ItemInfo.PlayerIndex = target.GetData().index;
+        ChangeColor(ItemInfo.PlayerIndex);
+
         RB.linearVelocity = -RB.linearVelocity;
     }
 
@@ -102,10 +104,33 @@ public class ItemBehavior: MonoBehaviour
 
     public void Invoke(ItemManager.ItemInfo itemInfo)
     {
+        ChangeColor(itemInfo.PlayerIndex);
+
         this.transform.position = itemInfo.Position;
         ItemInfo = itemInfo;
 
         Vector2 velocity = ItemInfo.Direction.normalized * ItemInfo.Speed;
         RB.linearVelocity = velocity;
+    }
+
+    public void ChangeColor(int index)
+    {
+        switch(index)
+        {
+            case 0:
+                this.GetComponent<SpriteRenderer>().color = Color.red;
+                break;
+            case 1:
+                this.GetComponent<SpriteRenderer>().color = Color.green;
+                break;
+            case 2:
+                this.GetComponent<SpriteRenderer>().color = Color.blue;
+                break;
+            case 3:
+                this.GetComponent<SpriteRenderer>().color = Color.yellow;
+                break;
+            default:
+                break;
+        }
     }
 }
