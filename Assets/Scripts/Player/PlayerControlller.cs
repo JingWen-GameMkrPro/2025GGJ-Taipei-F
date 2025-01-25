@@ -18,12 +18,18 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] List<GameObject> characterList;
     [SerializeField] PlayerAnimation aniControl;
 
+    [Header("0 up 1 down 2 right 3 left")]
+    [SerializeField] List<Transform> firePoints;
+
     #region Self
     [SerializeField]
     Vector2 move = Vector2.zero;
 
     [SerializeField]
     Vector2 faceto = Vector2.left;
+
+    [SerializeField]
+    int faceType = 3; //0 up 1 down 2 right 3 left
 
     [SerializeField]
     long lastDefenceTick = 0;
@@ -94,7 +100,6 @@ public class PlayerController : MonoBehaviour {
         //face where
         //優先上下
         //再左右
-        int faceType = -1;
         bool horizonMove = Mathf.Abs(x) >= Mathf.Abs(y);
         if (horizonMove) {
             if (x >= 0.001f) {
@@ -121,7 +126,7 @@ public class PlayerController : MonoBehaviour {
         ItemManager.ItemInfo info = new ItemManager.ItemInfo();
         info.PlayerIndex = data.index;
         info.Owner = gameObject;
-        info.Position = transform.position;
+        info.Position = firePoints[faceType].position;
         info.Direction = faceto;
         info.Speed = 10;
         ItemManager.Instance.UseItem(info);
