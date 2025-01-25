@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: cca3cb9e54cc652408e495153c41feba
+guid: 95fb27448674f814081305b3a1004eb9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4214874307172851855
-    second: tapioca_explode_0
+      213: 3316464478091775202
+    second: player_1_arm_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tapioca_explode_0
+      name: player_1_arm_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 210
-        height: 210
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 150
+        height: 50
+      alignment: 9
+      pivot: {x: 2, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 17f9a042622c185c0800000000000000
-      internalID: -4214874307172851855
+      spriteID: 2ec8cd61fd2760e20800000000000000
+      internalID: 3316464478091775202
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: e6d989027e32bd94b9d9e70148b54d5c
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      tapioca_explode_0: -4214874307172851855
+      player_1_arm_0: 3316464478091775202
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
