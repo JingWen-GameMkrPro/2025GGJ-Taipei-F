@@ -73,9 +73,12 @@ public class PlayerController : MonoBehaviour {
         isInitlized = true;
     }
 
-    private void Update() {
-        HandleMove();
+    private void Update() {     
         HandleHint();
+    }
+
+    private void FixedUpdate() {
+        HandleMove();
     }
 
     void HandleMove() {
@@ -217,6 +220,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     public Vector2 GetFaceTo() {
+        int t = 0;
         return faceto;
     }
 
@@ -227,7 +231,7 @@ public class PlayerController : MonoBehaviour {
         foreach (ItemManager.InteractType type in typeList) {
             switch (type) {
                 case ItemManager.InteractType.Boom:
-                    HandleDamage(10);
+                    HandleDamage(-10);
                     break;
                 case ItemManager.InteractType.SpeedDown:
                     HandleSpeedModify(-2);
@@ -256,7 +260,7 @@ public class PlayerData{
         this.device = device;
         this.index = index;
         this.hp = 100;
-        this.speed = 5;
+        this.speed = 60;
         this.canMove = true;
         this.playerController = playerController;
     }
