@@ -41,7 +41,6 @@ public class ItemManager : MonoBehaviour
 
     List<Queue<ItemType>> PlayerItems = new List<Queue<ItemType>>();
 
-
     public GameObject BubbleIconPrefab;
     public GameObject BubblePrefab;
 
