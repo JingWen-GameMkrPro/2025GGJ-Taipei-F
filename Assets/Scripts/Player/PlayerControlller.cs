@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour {
 
     void HandleHint() {
         if (defenceHint != null) {
-            defenceHint.SetActive(IsDefencing());
+            defenceHint.SetActive(data.IsDefencing());
         }
         if (dieHint != null) {
             dieHint.SetActive(data.IsDied());
@@ -141,20 +141,6 @@ public class PlayerController : MonoBehaviour {
     #region Public Functon
     public PlayerData GetData() {
         return data;
-    }
-
-    public bool IsDefencing() {
-        if (data.IsDied() || !data.isInitlized) {
-            return false;
-        }
-        // 1 tick = 0.0000001 sec
-        // 1000000 ticks = 0.1 sec
-        long safeDefenceTime = 10000000;
-        return System.DateTime.Now.Ticks - data.lastDefenceTick < safeDefenceTime;
-    }
-
-    public Vector2 GetFaceTo() {
-        return data.faceto;
     }
 
     public void TriggerHit(List<ItemManager.InteractType> typeList) {
@@ -276,6 +262,16 @@ public class PlayerData{
 
     public bool IsDied() {
         return hp <= 0;
+    }
+
+    public bool IsDefencing() {
+        if (IsDied() || !isInitlized) {
+            return false;
+        }
+        // 1 tick = 0.0000001 sec
+        // 1000000 ticks = 0.1 sec
+        long safeDefenceTime = 10000000;
+        return System.DateTime.Now.Ticks - lastDefenceTick < safeDefenceTime;
     }
 
     void Respawn() {
