@@ -131,59 +131,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sting_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 47
-        width: 25
-        height: 55
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 371638f339a851200800000000000000
-      internalID: 150178527617180019
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sting_1
-      rect:
-        serializedVersion: 2
-        x: 49
-        y: 90
-        width: 23
-        height: 39
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0c483041e87f23bc0800000000000000
-      internalID: -3804706545581456192
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: sting_2
       rect:
         serializedVersion: 2
-        x: 68
-        y: 47
-        width: 83
-        height: 136
+        x: 0
+        y: 0
+        width: 226
+        height: 183
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -196,99 +152,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: sting_3
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 94
-        width: 22
-        height: 33
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ede5b97067aaf4180800000000000000
-      internalID: -9128890495746220322
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sting_4
-      rect:
-        serializedVersion: 2
-        x: 197
-        y: 51
-        width: 29
-        height: 60
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fd4a086fdf7aadcd0800000000000000
-      internalID: -2532527131238292257
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sting_5
-      rect:
-        serializedVersion: 2
-        x: 22
-        y: 0
-        width: 44
-        height: 68
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 42258d5c4f6e80740800000000000000
-      internalID: 5118594915472265764
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sting_6
-      rect:
-        serializedVersion: 2
-        x: 158
-        y: 3
-        width: 35
-        height: 63
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1f0666cd1671ec3a0800000000000000
-      internalID: -6643346691247939343
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: f0ae06638355b8f4fa3904dcf020e9dd
     internalID: 0
     vertices: []
     indices: 
@@ -297,7 +165,14 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      sting_0: 150178527617180019
+      sting_1: -3804706545581456192
+      sting_2: 1533219502706048892
+      sting_3: -9128890495746220322
+      sting_4: -2532527131238292257
+      sting_5: 5118594915472265764
+      sting_6: -6643346691247939343
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
