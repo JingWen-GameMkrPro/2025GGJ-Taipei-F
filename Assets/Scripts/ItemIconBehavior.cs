@@ -31,7 +31,7 @@ public class ItemIconBehavior : MonoBehaviour
         {
             //collision.gameObject.GetComponent<PlayerController>().GetData().index
             //通知玩家，並告知自身類別
-            ItemManager.Instance.PickUpItem(collision.gameObject.GetComponent<PlayerController>().GetData().index, itemType);
+            ItemManager.Instance.PickUpItem(collision.gameObject.GetComponent<Player_HitSensor>().controller.GetData().index, itemType);
 
             //更改動畫，額外特效
 

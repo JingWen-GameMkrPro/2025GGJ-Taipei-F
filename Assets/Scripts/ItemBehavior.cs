@@ -55,17 +55,17 @@ public class ItemBehavior: MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    public void Reback(int newPlayerIndex)
+    public void Reback(PlayerController target)
     {
-        ItemInfo.PlayerIndex = newPlayerIndex;
+        ItemInfo.PlayerIndex = target.GetData().index;
         RB.linearVelocity = -RB.linearVelocity;
     }
 
-    public void SpeedDown(GameObject target)
+    public void SpeedDown(PlayerController target)
     {
         var types = new List<ItemManager.InteractType>();
         types.Add(ItemManager.InteractType.SpeedDown);
-        target.GetComponent<PlayerController>().TriggerHit(types);
+        target.TriggerHit(types);
 
         Destroy(this.gameObject);
     }
