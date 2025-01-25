@@ -14,8 +14,7 @@ public class PlayerController : MonoBehaviour {
 
     [Header("Character")]
     [SerializeField] CharacterController controller;
-    //[SerializeField] SpriteRenderer spriteRenderer;
-    [SerializeField] List<Material> playerMat;
+    [SerializeField] List<GameObject> characterList;
     [SerializeField] PlayerAnimation aniControl;
 
     #region Self
@@ -45,6 +44,9 @@ public class PlayerController : MonoBehaviour {
         data = new PlayerData(playerInput.devices[0], indexCount++, this);
 
         //spriteRenderer.material = playerMat[data.index];
+        for (int i = 0; i < characterList.Count; i++) {
+            characterList[i].SetActive(i == data.index);
+        }
 
         //Regis
 
@@ -83,18 +85,23 @@ public class PlayerController : MonoBehaviour {
         //優先上下
         //再左右
         int faceType = -1;
-        if (y >= 0.001f) {
-            faceto = Vector2.up;
-            faceType = 0;
-        } else if (y <= -0.001f) {
-            faceto = Vector2.down;
-            faceType = 1;
-        } else if (x >= 0.001f) {
-            faceto = Vector2.right;
-            faceType = 2;
-        } else if (x <= -0.001f) {
-            faceto = Vector2.left;
-            faceType = 3;
+        bool horizonMove = Mathf.Abs(x) >= Mathf.Abs(y);
+        if (horizonMove) {
+            if (x >= 0.001f) {
+                faceto = Vector2.right;
+                faceType = 2;
+            } else if (x <= -0.001f) {
+                faceto = Vector2.left;
+                faceType = 3;
+            }
+        } else {
+            if (y >= 0.001f) {
+                faceto = Vector2.up;
+                faceType = 0;
+            } else if (y <= -0.001f) {
+                faceto = Vector2.down;
+                faceType = 1;
+            }
         }
 
         aniControl.UpdateState(finalMov, faceType);
