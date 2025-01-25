@@ -78,19 +78,21 @@ public class ItemManager : MonoBehaviour
     //玩家本身主動使用道具，先進先出
     public void UseItem(int playerIndex, ItemInfo itemInfo)
     {
-        if (PlayerItems[playerIndex].Count > 0)
-        {
-            var item = PlayerItems[itemInfo.PlayerIndex].Dequeue();
-            switch (item)
-            {
-                case ItemType.Bubble:
-                    var instance = Instantiate(BubblePrefab);
-                    instance.GetComponent<ItemBehavior>().Invoke(itemInfo);
-                    return;
-                default:
-                    return;
-            }
-        }
+        //if (PlayerItems[playerIndex].Count > 0)
+        //{
+        //    var item = PlayerItems[itemInfo.PlayerIndex].Dequeue();
+        //    switch (item)
+        //    {
+        //        case ItemType.Bubble:
+        //            var instance = Instantiate(BubblePrefab);
+        //            instance.GetComponent<ItemBehavior>().Invoke(itemInfo);
+        //            return;
+        //        default:
+        //            return;
+        //    }
+        //}
+        var instance = Instantiate(BubblePrefab);
+        instance.GetComponent<ItemBehavior>().Invoke(itemInfo);
     }
 }
 
