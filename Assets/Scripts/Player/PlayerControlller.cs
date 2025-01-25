@@ -108,7 +108,13 @@ public class PlayerController : MonoBehaviour {
     }
 
     void HandleAttack() {
-
+        ItemManager.ItemInfo info = new ItemManager.ItemInfo();
+        info.PlayerIndex = data.index;
+        info.Owner = gameObject;
+        info.Position = transform.position;
+        info.Direction = faceto;
+        info.Speed = 10;
+        ItemManager.Instance.UseItem(info);
     }
 
     void HandleDamage(int v) {
