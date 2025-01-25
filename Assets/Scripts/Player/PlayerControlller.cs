@@ -232,6 +232,7 @@ public class PlayerController : MonoBehaviour {
             switch (type) {
                 case ItemManager.InteractType.Damage:
                     HandleDamage(-10);
+                    break;
                 case ItemManager.InteractType.Boom:
                     HandleDamage(-20);
                     break;
@@ -262,7 +263,7 @@ public class PlayerData{
         this.device = device;
         this.index = index;
         this.hp = 100;
-        this.speed = 60;
+        this.speed = 50;
         this.canMove = true;
         this.playerController = playerController;
     }
