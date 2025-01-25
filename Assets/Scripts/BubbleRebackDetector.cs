@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BubbleRebackDetector : MonoBehaviour
@@ -22,6 +23,10 @@ public class BubbleRebackDetector : MonoBehaviour
                 if(collision.gameObject.GetComponent<PlayerController>().IsDefencing())
                 {
                     behavior.Reback(collision.gameObject.GetComponent<PlayerController>().GetData().index);
+                }
+                else
+                {
+                    behavior.SpeedDown(collision.gameObject);
                 }
             }
         }
