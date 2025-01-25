@@ -29,8 +29,9 @@ public class ItemIconBehavior : MonoBehaviour
         //！！確認玩家專屬Tag
         if (collisionTag == "Player")
         {
+            //collision.gameObject.GetComponent<PlayerController>().GetData().index
             //通知玩家，並告知自身類別
-            ItemManager.Instance.PickUpItem(itemType);
+            ItemManager.Instance.PickUpItem(collision.gameObject.GetComponent<PlayerController>().GetData().index, itemType);
 
             //更改動畫，額外特效
 
