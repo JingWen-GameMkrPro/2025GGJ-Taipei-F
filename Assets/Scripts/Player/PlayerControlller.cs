@@ -216,6 +216,10 @@ public class PlayerController : MonoBehaviour {
         return System.DateTime.Now.Ticks - lastDefenceTick < safeDefenceTime;
     }
 
+    public Vector2 GetFaceTo() {
+        return faceto;
+    }
+
     public void TriggerHit(List<ItemManager.InteractType> typeList) {
         if (data.IsDied() || !isInitlized) {
             return;
