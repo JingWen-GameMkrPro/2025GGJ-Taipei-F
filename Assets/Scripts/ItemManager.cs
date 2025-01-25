@@ -32,6 +32,7 @@ public class ItemManager : MonoBehaviour
         Boom = 0,
         SpeedUp = 1,
         SpeedDown = 2,
+        Damage = 3,
     }
     public struct ItemInfo
     {

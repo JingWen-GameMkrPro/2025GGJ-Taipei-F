@@ -67,6 +67,7 @@ public class ItemBehavior: MonoBehaviour
     {
         var types = new List<ItemManager.InteractType>();
         types.Add(ItemManager.InteractType.SpeedDown);
+        types.Add(ItemManager.InteractType.Damage);
         target.TriggerHit(types);
 
         Destroy(this.gameObject);
