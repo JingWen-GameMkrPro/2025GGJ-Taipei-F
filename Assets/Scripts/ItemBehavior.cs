@@ -102,7 +102,9 @@ public class ItemBehavior: MonoBehaviour
 
     public void Invoke(ItemManager.ItemInfo itemInfo)
     {
+        this.transform.position = itemInfo.Position;
         ItemInfo = itemInfo;
+
         Vector2 velocity = ItemInfo.Direction.normalized * ItemInfo.Speed;
         RB.linearVelocity = velocity;
     }

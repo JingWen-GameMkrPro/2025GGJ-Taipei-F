@@ -76,7 +76,7 @@ public class ItemManager : MonoBehaviour
     //玩家本身主動使用道具，先進先出
     public void UseItem(ItemInfo itemInfo)
     {
-        //if (PlayerItems[playerIndex].Count > 0)
+        //if (PlayerItems[itemInfo.PlayerIndex].Count > 0)
         //{
         //    var item = PlayerItems[itemInfo.PlayerIndex].Dequeue();
         //    switch (item)
