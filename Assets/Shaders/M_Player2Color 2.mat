@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Player2Color
+  m_Name: M_Player2Color 2
   m_Shader: {fileID: 4800000, guid: 5d0ff74fa744f734abac9ec9a132db66, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -48,7 +48,7 @@ Material:
     - _EnableExternalAlpha: 0
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0.5611168, g: 1, b: 0.2971698, a: 1}
+    - _Color: {r: 0.7034259, g: 0.33490568, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

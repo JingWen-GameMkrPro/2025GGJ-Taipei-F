@@ -3,8 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
 
-public class PlayerController : MonoBehaviour
-{
+public class PlayerController : MonoBehaviour {
     PlayerData data;
 
     //TEMP
@@ -18,6 +17,12 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public CharacterController controller;
     public SpriteRenderer spriteRenderer;
+    public List<Material> playerMat; 
+
+    #region Self
+    [SerializeField]
+    Vector2 move = Vector2.zero;
+    #endregion 
 
     private void OnEnable() {
         Setup();
@@ -34,25 +39,42 @@ public class PlayerController : MonoBehaviour
 
         data = new PlayerData(playerInput.devices[0], indexCount++);
 
-        //TEMP
-        List<Color> colors = new List<Color> { Color.black, Color.cyan, Color.gray, Color.blue};
-        spriteRenderer.color = colors[data.index];
+        spriteRenderer.material = playerMat[data.index];
 
         //Regis
+
+        DontDestroyOnLoad(gameObject);
+    }
+
+    private void Update() {
+        HandleMove();
+    }
+
+    void HandleMove() {
+        if (data.canMove == false) {
+            return;
+        }
+        Vector2 finalMov = new Vector2(move.x, move.y);
+        float x = finalMov.x;
+        float y = finalMov.y;
+
+        //斜方處理
+        if (x + y > 1 || x + y < -1 ||
+            (x > 0.1f && y < -0.1f) ||
+            (x < -0.1f && y > 0.1f)) {
+
+            finalMov.x = x * Mathf.Sqrt(0.5f);
+            finalMov.y = y * Mathf.Sqrt(0.5f); 
+        }
+
+        if (controller != null) {
+            controller.Move(finalMov);
+        }
     }
 
     public void DoMove(InputAction.CallbackContext ctx) {
-        Vector2 move = ctx.ReadValue<Vector2>();
-        Debug.Log(move * Time.deltaTime * data.speed);
-
-        move = move.normalized * data.speed * Time.deltaTime;
-        if (controller != null) {
-            controller.Move(move);
-        }
-        if (rb != null) {
-            rb.MovePosition(move);
-        }
-
+        move = ctx.ReadValue<Vector2>();
+        move = move * Time.deltaTime * data.speed;
     }
 
     public void DoConFirm(InputAction.CallbackContext ctx) {
@@ -83,11 +105,13 @@ public class PlayerData{
     public InputDevice device;
     public int hp;
     public int speed;
+    public bool canMove;
 
     public PlayerData(InputDevice device, int index) {
         this.device = device;
         this.index = index;
         this.hp = 100;
-        this.speed = 10;
+        this.speed = 5;
+        this.canMove = true;
     }
 }
