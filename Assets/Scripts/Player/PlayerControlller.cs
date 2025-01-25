@@ -73,18 +73,12 @@ public class PlayerController : MonoBehaviour {
         isInitlized = true;
     }
 
-    private void Update() {     
+    private void Update() {
         HandleHint();
-    }
-
-    private void FixedUpdate() {
         HandleMove();
     }
 
     void HandleMove() {
-        if (data.canMove == false) {
-            return;
-        }
         Vector2 finalMov = new Vector2(move.x, move.y);
         float x = finalMov.x;
         float y = finalMov.y;
@@ -161,6 +155,7 @@ public class PlayerController : MonoBehaviour {
 
     public void DoMove(InputAction.CallbackContext ctx) {
         if (data.IsDied() || !data.canMove || !isInitlized) {
+            move = Vector2.zero;
             return;
         }
         move = ctx.ReadValue<Vector2>();
@@ -237,10 +232,10 @@ public class PlayerController : MonoBehaviour {
                     HandleDamage(-20);
                     break;
                 case ItemManager.InteractType.SpeedDown:
-                    HandleSpeedModify(-15);
+                    HandleSpeedModify(-1);
                     break;
                 case ItemManager.InteractType.SpeedUp:
-                    HandleSpeedModify(15);
+                    HandleSpeedModify(1);
                     break;
             }
         }
@@ -263,7 +258,7 @@ public class PlayerData{
         this.device = device;
         this.index = index;
         this.hp = 100;
-        this.speed = 40;
+        this.speed = 10;
         this.canMove = true;
         this.playerController = playerController;
     }
