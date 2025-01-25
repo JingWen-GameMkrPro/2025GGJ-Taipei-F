@@ -308,10 +308,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 6112366674546143757}
   characterList:
-  - {fileID: 7579228829398797035}
   - {fileID: 3955628575712760539}
   - {fileID: 8052522768125172455}
   - {fileID: 6241715226746621250}
+  - {fileID: 7579228829398797035}
   aniControl: {fileID: 87035845183767444}
   firePoints:
   - {fileID: 5725743377895802172}
