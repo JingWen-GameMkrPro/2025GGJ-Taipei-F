@@ -29,7 +29,11 @@ public class ItemManager : MonoBehaviour
         Bubble = 0,
         SpeedUp = 1,
     }
-
+    public enum InteractType
+    {
+        Boom = 0,
+        SpeedUp = 1,
+    }
     public struct ItemInfo
     {
         public int PlayerIndex;
