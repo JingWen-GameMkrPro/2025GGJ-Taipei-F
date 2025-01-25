@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &915213084521049126
 Transform:
   m_ObjectHideFlags: 0
@@ -32,7 +32,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2279937751298781680}
+  - {fileID: 4855878494659519262}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7867329059711790842
@@ -77,22 +77,26 @@ MonoBehaviour:
     m_ActionId: f4a2f3e2-2870-4975-ba78-83e2f5a68578
     m_ActionName: 'Player_bubble/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 4c1c60b7-462d-4d29-b28f-84af13e0beac
-    m_ActionName: 'Player_bubble/Look[/Mouse/delta,/Pen/delta]'
-  - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -4754740460359742031}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: DoDefence
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: b0392e0f-f427-43c4-9a66-e50c2b1776e3
     m_ActionName: 'Player_bubble/Attack[/Mouse/leftButton,/Keyboard/enter]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: dd02c92b-575a-4d72-b479-66fad579822d
-    m_ActionName: 'Player_bubble/Interact[/Keyboard/e]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: -4754740460359742031}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: DoConFirm
+        m_MethodName: DoAttack
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -104,22 +108,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 46881ab0-5f36-4e5c-9a5a-a692fdbb3cad
     m_ActionName: 'Player_bubble/Crouch[/Keyboard/c]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 91395c95-46f2-47d8-890f-6b0309d409b4
-    m_ActionName: 'Player_bubble/Jump[/Keyboard/space]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 50c90a21-a4ee-40d6-b027-440b0ec31d2b
-    m_ActionName: 'Player_bubble/Previous[/Keyboard/1]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 2dc0e2ee-bac9-449b-a264-deb5d6664650
-    m_ActionName: 'Player_bubble/Next[/Keyboard/2]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 41ed9fde-4de0-49b7-bd23-9dc91d04114c
-    m_ActionName: 'Player_bubble/Sprint[/Keyboard/leftShift]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: c95b2375-e6d9-4b88-9c4c-c5e76515df4b
@@ -160,6 +148,42 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 881e34f4-70a3-4ad9-a38e-b08b3fb078d9
+    m_ActionName: 'Player_backup/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 523293c0-3cde-4de4-80e2-c33b804e17a6
+    m_ActionName: 'Player_backup/Look[/Mouse/delta,/Pen/delta]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 817e94f1-0689-4afa-beac-806cdb63c749
+    m_ActionName: 'Player_backup/Attack[/Mouse/leftButton,/Keyboard/enter]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a2faa532-dbf7-468c-819a-f94cdbde5a27
+    m_ActionName: 'Player_backup/Crouch[/Keyboard/e]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f5f64060-2502-4c95-8a37-93fdd379e710
+    m_ActionName: 'Player_backup/Interact[/Keyboard/c]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2c587605-3b4d-4cea-99c0-852ab850d612
+    m_ActionName: 'Player_backup/Jump[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 20d38e87-ffd4-46be-97ce-04cd9b539cbe
+    m_ActionName: 'Player_backup/Previous[/Keyboard/1]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3693b01d-7808-4503-97a7-31459ecf2bf8
+    m_ActionName: 'Player_backup/Next[/Keyboard/2]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 753d4e10-25b5-4fcf-95eb-aff4707c6708
+    m_ActionName: 'Player_backup/Sprint[/Keyboard/leftShift]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player_bubble
@@ -177,15 +201,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb8a785a453c5454f9c88ba76e6568e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
   controller: {fileID: 6112366674546143757}
-  spriteRenderer: {fileID: 4635860044955364539}
+  spriteRenderer: {fileID: 0}
   playerMat:
   - {fileID: 2100000, guid: 660a83e789edf0f43b84b8cb66cc397d, type: 2}
   - {fileID: 2100000, guid: a3a7a14d0377bba4fb758d50b5d35e89, type: 2}
   - {fileID: 2100000, guid: 1b6713a66c3f04a1f92f2efa8af178bf, type: 2}
   - {fileID: 2100000, guid: 546ae329d9b7048ccb825073c86d115e, type: 2}
   move: {x: 0, y: 0}
+  lastDefenceTick: 0
 --- !u!143 &6112366674546143757
 CharacterController:
   m_ObjectHideFlags: 0
@@ -226,6 +250,10 @@ PrefabInstance:
     - target: {fileID: 7428447180831456027, guid: d7facffa5033b3242a8b98dcbeea43de, type: 3}
       propertyPath: m_Name
       value: player_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093390733612444123, guid: d7facffa5033b3242a8b98dcbeea43de, type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8310434340089711503, guid: d7facffa5033b3242a8b98dcbeea43de, type: 3}
       propertyPath: m_LocalPosition.x
@@ -272,13 +300,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7facffa5033b3242a8b98dcbeea43de, type: 3}
---- !u!4 &2279937751298781680 stripped
+--- !u!4 &4855878494659519262 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8310434340089711503, guid: d7facffa5033b3242a8b98dcbeea43de, type: 3}
-  m_PrefabInstance: {fileID: 7851866857524689535}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &4635860044955364539 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 3216288563684857540, guid: d7facffa5033b3242a8b98dcbeea43de, type: 3}
+  m_CorrespondingSourceObject: {fileID: 3428616511529965921, guid: d7facffa5033b3242a8b98dcbeea43de, type: 3}
   m_PrefabInstance: {fileID: 7851866857524689535}
   m_PrefabAsset: {fileID: 0}

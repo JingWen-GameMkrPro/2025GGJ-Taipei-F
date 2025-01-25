@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
 
@@ -14,7 +13,6 @@ public class PlayerController : MonoBehaviour {
     PlayerInput playerInput;
 
     [Header("Character")]
-    public Rigidbody2D rb;
     public CharacterController controller;
     public SpriteRenderer spriteRenderer;
     public List<Material> playerMat; 
@@ -22,6 +20,9 @@ public class PlayerController : MonoBehaviour {
     #region Self
     [SerializeField]
     Vector2 move = Vector2.zero;
+
+    [SerializeField]
+    long lastDefenceTick = 0;
     #endregion 
 
     private void OnEnable() {
@@ -77,13 +78,23 @@ public class PlayerController : MonoBehaviour {
         move = move * Time.deltaTime * data.speed;
     }
 
-    public void DoConFirm(InputAction.CallbackContext ctx) {
+    public void DoAttack(InputAction.CallbackContext ctx) {
         if (ctx.performed == false) {
             StopVibrate();
             return;
         }
-        Debug.Log("DOConfrim");
+        Debug.Log("DoAttack");
+        TrggerVibrate(0.1f, 0.5f);
+    }
 
+    public void DoDefence(InputAction.CallbackContext ctx) {
+        if (ctx.performed == false) {
+            StopVibrate();
+            return;
+        }
+        Debug.Log("DoDefence");
+
+        lastDefenceTick = System.DateTime.Now.Ticks;
         TrggerVibrate(0.1f, 0.5f);
     }
 
@@ -101,6 +112,17 @@ public class PlayerController : MonoBehaviour {
 
     public PlayerData GetData() {
         return data;
+    }
+
+    public bool IsDefencing() {
+        // 1 tick = 0.0000001 sec
+        // 1000000 ticks = 0.1 sec
+        long safeDefenceTime = 1000000;
+        return System.DateTime.Now.Ticks - lastDefenceTick < safeDefenceTime;
+    }
+
+    public void TriggerHint() {
+
     }
 }
 
