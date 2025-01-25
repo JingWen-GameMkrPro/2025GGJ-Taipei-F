@@ -21,6 +21,10 @@ public class PlayerController : MonoBehaviour {
     [Header("0 up 1 down 2 right 3 left")]
     [SerializeField] List<Transform> firePoints;
 
+    [Header("Hint")]
+    [SerializeField] GameObject defenceHint;
+    [SerializeField] GameObject dieHint;
+
     #region Self
     [SerializeField]
     Vector2 move = Vector2.zero;
@@ -71,6 +75,7 @@ public class PlayerController : MonoBehaviour {
 
     private void Update() {
         HandleMove();
+        HandleHint();
     }
 
     void HandleMove() {
@@ -140,6 +145,15 @@ public class PlayerController : MonoBehaviour {
         data.ModifySpeed(v);
     }
 
+    void HandleHint() {
+        if (defenceHint != null) {
+            defenceHint.SetActive(IsDefencing());
+        }
+        if (dieHint != null) {
+            dieHint.SetActive(data.IsDied());
+        }
+    }
+
     #region Input
 
     public void DoMove(InputAction.CallbackContext ctx) {
@@ -173,22 +187,6 @@ public class PlayerController : MonoBehaviour {
         lastDefenceTick = System.DateTime.Now.Ticks;
     }
 
-    private void OnTriggerEnter(Collider other) {
-        Debug.Log("OnTriggerEnter");
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision) {
-        Debug.Log("OnTriggerEnter2D");
-    }
-
-    private void OnCollisionEnter(Collision collision) {
-        Debug.Log("OnCollisionEnter");
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision) {
-        Debug.Log("OnCollisionEnter2D");
-    }
-
     #endregion
 
     //void TrggerVibrate(float low, float high) {
@@ -209,13 +207,19 @@ public class PlayerController : MonoBehaviour {
     }
 
     public bool IsDefencing() {
+        if (data.IsDied() || !isInitlized) {
+            return false;
+        }
         // 1 tick = 0.0000001 sec
         // 1000000 ticks = 0.1 sec
-        long safeDefenceTime = 1000000;
+        long safeDefenceTime = 10000000;
         return System.DateTime.Now.Ticks - lastDefenceTick < safeDefenceTime;
     }
 
     public void TriggerHit(List<ItemManager.InteractType> typeList) {
+        if (data.IsDied() || !isInitlized) {
+            return;
+        }
         foreach (ItemManager.InteractType type in typeList) {
             switch (type) {
                 case ItemManager.InteractType.Boom:
