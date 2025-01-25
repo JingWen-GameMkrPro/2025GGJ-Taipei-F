@@ -63,7 +63,7 @@ namespace GamePlay
 
 		public void Start()
 		{
-			if (_stateManager.GameState != GameState.Match)
+			if (_stateManager.CurrentState != _stateManager.GetState<MatchState>())
 			{
 				_errorHandler.Handle(MatchResult.BattleIsStarted);
 				return;
@@ -81,7 +81,7 @@ namespace GamePlay
 				return;
 			}
 
-			_stateManager.GameState = GameState.Battle;
+			_stateManager.ChangeState<BattleState>();
 			//TODO: 進入遊戲
 		}
 	}
