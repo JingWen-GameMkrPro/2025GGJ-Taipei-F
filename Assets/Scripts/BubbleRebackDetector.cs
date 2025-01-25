@@ -48,7 +48,7 @@ public class BubbleRebackDetector : MonoBehaviour
             //是撞到別人
             if (!controller.GetData().IsDied() && controller.GetData().index != behavior.ItemInfo.PlayerIndex)
             {
-                if (controller.IsDefencing() && controller.GetFaceTo() == -behavior.RB.linearVelocity)
+                if (controller.IsDefencing() && controller.GetFaceTo() == -behavior.RB.linearVelocity.normalized)
                 {
                     behavior.Reback(controller);
                 }
@@ -59,7 +59,7 @@ public class BubbleRebackDetector : MonoBehaviour
             }
             else if(!controller.GetData().IsDied() && controller.GetData().index == behavior.ItemInfo.PlayerIndex)
             {
-                if (controller.IsDefencing() && controller.GetFaceTo() == -behavior.RB.linearVelocity)
+                if (controller.IsDefencing() && controller.GetFaceTo() == -behavior.RB.linearVelocity.normalized)
                 {
                     behavior.Reback(controller);
                 }
