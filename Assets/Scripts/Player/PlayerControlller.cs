@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
+    [SerializeField]
     PlayerData data;
 
     //TEMP
@@ -23,24 +24,7 @@ public class PlayerController : MonoBehaviour {
 
     [Header("Hint")]
     [SerializeField] GameObject defenceHint;
-    [SerializeField] GameObject dieHint;
-
-    #region Self
-    [SerializeField]
-    Vector2 move = Vector2.zero;
-
-    [SerializeField]
-    Vector2 faceto = Vector2.left;
-
-    [SerializeField]
-    int faceType = 3; //0 up 1 down 2 right 3 left
-
-    [SerializeField]
-    long lastDefenceTick = 0;
-
-    [SerializeField]
-    bool isInitlized = false;
-    #endregion 
+    [SerializeField] GameObject dieHint; 
 
     private void OnEnable() {
         Setup();
@@ -48,12 +32,6 @@ public class PlayerController : MonoBehaviour {
 
     void Setup() {
         playerInput = GetComponent<PlayerInput>();
-
-        Debug.Log(playerInput.devices[0].GetType());
-        if (playerInput.devices[0].GetType().ToString().Equals("")) {
-            Destroy(gameObject);
-            return;
-        }
 
         data = new PlayerData(playerInput.devices[0], indexCount++, this);
 
@@ -70,7 +48,7 @@ public class PlayerController : MonoBehaviour {
 
     IEnumerator Finish() {
         yield return new WaitForSecondsRealtime(0.5f);
-        isInitlized = true;
+        data.isInitlized = true;
     }
 
     private void Update() {
@@ -79,58 +57,20 @@ public class PlayerController : MonoBehaviour {
     }
 
     void HandleMove() {
-        Vector2 finalMov = new Vector2(move.x, move.y);
-        float x = finalMov.x;
-        float y = finalMov.y;
-
-        //斜方處理
-        if (x + y > 1 || x + y < -1 ||
-            (x > 0.1f && y < -0.1f) ||
-            (x < -0.1f && y > 0.1f)) {
-
-            x = x * Mathf.Sqrt(0.5f);
-            y = y * Mathf.Sqrt(0.5f); 
-        }
-
-        finalMov.x = x;
-        finalMov.y = y;
-
         if (controller != null) {
-            controller.Move(finalMov);
+            controller.Move(data.move);
         }
 
-        //face where
-        //優先上下
-        //再左右
-        bool horizonMove = Mathf.Abs(x) >= Mathf.Abs(y);
-        if (horizonMove) {
-            if (x >= 0.001f) {
-                faceto = Vector2.right;
-                faceType = 2;
-            } else if (x <= -0.001f) {
-                faceto = Vector2.left;
-                faceType = 3;
-            }
-        } else {
-            if (y >= 0.001f) {
-                faceto = Vector2.up;
-                faceType = 0;
-            } else if (y <= -0.001f) {
-                faceto = Vector2.down;
-                faceType = 1;
-            }
-        }
-
-        aniControl.UpdateState(finalMov, faceType);
+        aniControl.UpdateState(data.move, data.faceType);
     }
 
     void HandleAttack() {
         ItemManager.ItemInfo info = new ItemManager.ItemInfo();
         info.PlayerIndex = data.index;
         info.Owner = gameObject;
-        info.Position = firePoints[faceType].position;
-        info.Direction = faceto;
-        info.Speed = 10;
+        info.Position = firePoints[data.faceType].position;
+        info.Direction = data.faceto;
+        info.Speed = 15;
         ItemManager.Instance.UseItem(info);
     }
 
@@ -154,19 +94,18 @@ public class PlayerController : MonoBehaviour {
     #region Input
 
     public void DoMove(InputAction.CallbackContext ctx) {
-        if (data.IsDied() || !data.canMove || !isInitlized) {
-            move = Vector2.zero;
+        if (data.IsDied() || !data.canMove || !data.isInitlized) {
+            data.UpdateMove(Vector2.zero);
             return;
         }
-        move = ctx.ReadValue<Vector2>();
-        move = move * Time.fixedDeltaTime * data.speed * 0.05f;
+        data.UpdateMove(ctx.ReadValue<Vector2>());
     }
 
     public void DoAttack(InputAction.CallbackContext ctx) {
         if (ctx.performed == false) {
             return;
         }
-        if (data.IsDied() || !isInitlized) {
+        if (data.IsDied() || !data.isInitlized) {
             return;
         }
         Debug.Log("DoAttack");
@@ -177,12 +116,12 @@ public class PlayerController : MonoBehaviour {
         if (ctx.performed == false) {
             return;
         }
-        if (data.IsDied() || !isInitlized) {
+        if (data.IsDied() || !data.isInitlized) {
             return;
         }
         Debug.Log("DoDefence");
 
-        lastDefenceTick = System.DateTime.Now.Ticks;
+        data.UpdateDefenceTick();
     }
 
     #endregion
@@ -205,22 +144,21 @@ public class PlayerController : MonoBehaviour {
     }
 
     public bool IsDefencing() {
-        if (data.IsDied() || !isInitlized) {
+        if (data.IsDied() || !data.isInitlized) {
             return false;
         }
         // 1 tick = 0.0000001 sec
         // 1000000 ticks = 0.1 sec
         long safeDefenceTime = 10000000;
-        return System.DateTime.Now.Ticks - lastDefenceTick < safeDefenceTime;
+        return System.DateTime.Now.Ticks - data.lastDefenceTick < safeDefenceTime;
     }
 
     public Vector2 GetFaceTo() {
-        int t = 0;
-        return faceto;
+        return data.faceto;
     }
 
     public void TriggerHit(List<ItemManager.InteractType> typeList) {
-        if (data.IsDied() || !isInitlized) {
+        if (data.IsDied() || !data.isInitlized) {
             return;
         }
         foreach (ItemManager.InteractType type in typeList) {
@@ -244,12 +182,19 @@ public class PlayerController : MonoBehaviour {
     #endregion
 }
 
+[SerializeField]
 public class PlayerData{
     public int index;
     public InputDevice device;
     public int hp;
     public int speed;
     public bool canMove;
+
+    public Vector2 move = Vector2.zero;
+    public Vector2 faceto = Vector2.left;
+    public int faceType = 3; //0 up 1 down 2 right 3 left
+    public long lastDefenceTick = 0;
+    public bool isInitlized = false;
 
     //GameObject
     public PlayerController playerController;
@@ -258,7 +203,7 @@ public class PlayerData{
         this.device = device;
         this.index = index;
         this.hp = 100;
-        this.speed = 10;
+        this.speed = 20;
         this.canMove = true;
         this.playerController = playerController;
     }
@@ -267,6 +212,8 @@ public class PlayerData{
         hp += v;
         if (hp <= 0) {
             hp = 0;
+
+            move = Vector2.zero;
         }
     }
     public void ModifySpeed(int v) {
@@ -276,7 +223,63 @@ public class PlayerData{
         }
     }
 
+    public void UpdateDefenceTick() {
+        lastDefenceTick = System.DateTime.Now.Ticks;
+    }
+
+    public void UpdateMove(Vector2 v) {
+        move = v * Time.fixedDeltaTime * speed * 0.05f;
+
+        float x = move.x;
+        float y = move.y;
+
+        //斜方處理
+        if (x + y > 1 || x + y < -1 ||
+            (x > 0.1f && y < -0.1f) ||
+            (x < -0.1f && y > 0.1f)) {
+
+            x = x * Mathf.Sqrt(0.5f);
+            y = y * Mathf.Sqrt(0.5f);
+        }
+
+        move.x = x;
+        move.y = y;
+
+        UpdateFace();
+    }
+
+    public void UpdateFace() {
+        //face where
+        //優先上下
+        //再左右
+        float x = move.x;
+        float y = move.y;
+        bool horizonMove = Mathf.Abs(move.x) >= Mathf.Abs(y);
+        if (horizonMove) {
+            if (x >= 0.001f) {
+                faceto = Vector2.right;
+                faceType = 2;
+            } else if (x <= -0.001f) {
+                faceto = Vector2.left;
+                faceType = 3;
+            }
+        } else {
+            if (y >= 0.001f) {
+                faceto = Vector2.up;
+                faceType = 0;
+            } else if (y <= -0.001f) {
+                faceto = Vector2.down;
+                faceType = 1;
+            }
+        }
+    }
+
     public bool IsDied() {
         return hp <= 0;
+    }
+
+    void Respawn() {
+        hp = 100;
+        canMove = true;
     }
 }
