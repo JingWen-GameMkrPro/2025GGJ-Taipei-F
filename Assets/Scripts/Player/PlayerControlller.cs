@@ -230,14 +230,16 @@ public class PlayerController : MonoBehaviour {
         }
         foreach (ItemManager.InteractType type in typeList) {
             switch (type) {
-                case ItemManager.InteractType.Boom:
+                case ItemManager.InteractType.Damage:
                     HandleDamage(-10);
+                case ItemManager.InteractType.Boom:
+                    HandleDamage(-20);
                     break;
                 case ItemManager.InteractType.SpeedDown:
-                    HandleSpeedModify(-2);
+                    HandleSpeedModify(-15);
                     break;
                 case ItemManager.InteractType.SpeedUp:
-                    HandleSpeedModify(2);
+                    HandleSpeedModify(15);
                     break;
             }
         }
