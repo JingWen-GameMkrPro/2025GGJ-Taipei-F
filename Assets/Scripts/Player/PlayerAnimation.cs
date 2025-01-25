@@ -7,9 +7,6 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] float speed = 0;
     [SerializeField] bool faceup = false;
 
-    [Header("Animation")]
-    [SerializeField] Animator animator;
-
     [Header("body")]
     [SerializeField] List<GameObject> bodyList;
     [SerializeField] bool isLeft = true;
@@ -43,8 +40,12 @@ public class PlayerAnimation : MonoBehaviour
     }
 
     void HandleAnimation() {
-        animator.SetBool("face", faceup);
-        animator.SetFloat("speed", speed);
+        foreach (GameObject obj in bodyList) {
+            if (obj.activeSelf == true && obj.GetComponent<Animator>() != null) {
+                obj.GetComponent<Animator>().SetBool("face", faceup);
+                obj.GetComponent<Animator>().SetFloat("speed", speed);
+            }
+        }
     }
 
     void HandldBody() {

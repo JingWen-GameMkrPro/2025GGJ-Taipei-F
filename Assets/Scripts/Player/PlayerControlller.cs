@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using System.Collections;
 
 public class PlayerController : MonoBehaviour {
     PlayerData data;
@@ -26,6 +27,9 @@ public class PlayerController : MonoBehaviour {
 
     [SerializeField]
     long lastDefenceTick = 0;
+
+    [SerializeField]
+    bool isInitlized = false;
     #endregion 
 
     private void OnEnable() {
@@ -51,6 +55,12 @@ public class PlayerController : MonoBehaviour {
         //Regis
 
         DontDestroyOnLoad(gameObject);
+        StartCoroutine(Finish());
+    }
+
+    IEnumerator Finish() {
+        yield return new WaitForSecondsRealtime(0.5f);
+        isInitlized = true;
     }
 
     private void Update() {
@@ -128,7 +138,7 @@ public class PlayerController : MonoBehaviour {
     #region Input
 
     public void DoMove(InputAction.CallbackContext ctx) {
-        if (data.IsDied() || !data.canMove) {
+        if (data.IsDied() || !data.canMove || !isInitlized) {
             return;
         }
         move = ctx.ReadValue<Vector2>();
@@ -139,7 +149,7 @@ public class PlayerController : MonoBehaviour {
         if (ctx.performed == false) {
             return;
         }
-        if (data.IsDied()) {
+        if (data.IsDied() || !isInitlized) {
             return;
         }
         Debug.Log("DoAttack");
@@ -150,12 +160,28 @@ public class PlayerController : MonoBehaviour {
         if (ctx.performed == false) {
             return;
         }
-        if (data.IsDied()) {
+        if (data.IsDied() || !isInitlized) {
             return;
         }
         Debug.Log("DoDefence");
 
         lastDefenceTick = System.DateTime.Now.Ticks;
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        Debug.Log("OnTriggerEnter");
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        Debug.Log("OnTriggerEnter2D");
+    }
+
+    private void OnCollisionEnter(Collision collision) {
+        Debug.Log("OnCollisionEnter");
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        Debug.Log("OnCollisionEnter2D");
     }
 
     #endregion
