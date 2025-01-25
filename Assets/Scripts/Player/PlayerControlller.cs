@@ -148,7 +148,7 @@ public class PlayerController : MonoBehaviour {
         return System.DateTime.Now.Ticks - lastDefenceTick < safeDefenceTime;
     }
 
-    public void TriggerHit(ItemManager.ItemType type) {
+    public void TriggerHit(List<ItemManager.InteractType> typeList) {
 
     }
 }
