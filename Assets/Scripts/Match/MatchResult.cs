@@ -4,6 +4,7 @@ namespace GamePlay
 	{
 		Success,
 		NotJoin,
+		AlreadyJoin,
 		JoinFail,
 		AlreadyReady,
 		ReadyFail,
