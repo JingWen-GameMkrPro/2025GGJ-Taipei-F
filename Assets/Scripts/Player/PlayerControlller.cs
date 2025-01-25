@@ -159,7 +159,7 @@ public class PlayerController : MonoBehaviour {
             return;
         }
         move = ctx.ReadValue<Vector2>();
-        move = move * Time.deltaTime * data.speed;
+        move = move * Time.fixedDeltaTime * data.speed * 0.05f;
     }
 
     public void DoAttack(InputAction.CallbackContext ctx) {
