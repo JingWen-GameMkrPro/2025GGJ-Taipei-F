@@ -1,12 +1,12 @@
 namespace Utility
 {
 	/// <summary>
-	/// æV@Ò
+	/// è§€å¯Ÿè€…
 	/// </summary>
 	public interface IObserver<T>
 	{
 		/// <summary>
-		/// XVC—Rå‘èŒÄ‹©
+		/// æ›´æ–°ï¼Œç”±ä¸»é¡Œå‘¼å«
 		/// </summary>
 		void Update(T data);
 	}
