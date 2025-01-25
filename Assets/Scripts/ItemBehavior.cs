@@ -39,7 +39,7 @@ public class ItemBehavior: MonoBehaviour
         {
             var types = new List<ItemManager.InteractType>();
             types.Add(ItemManager.InteractType.Boom);
-            player.GetComponent<PlayerController>().TriggerHit(types);
+            player.GetComponent<Player_HitSensor>().controller.TriggerHit(types);
         }
 
         Destroy(this.gameObject);
@@ -74,11 +74,13 @@ public class ItemBehavior: MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         var collisionTag = collision.gameObject.tag;
 
         //¡I¡I½T»{ª±®a±MÄÝTag
         if (collisionTag == "Player")
         {
+            Debug.Log("awsdaw");
             boomRangePlayers.Add(collision.gameObject);
         }
     }

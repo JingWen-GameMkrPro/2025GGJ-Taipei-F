@@ -44,6 +44,10 @@ public class BubbleRebackDetector : MonoBehaviour
         if (collisionTag == "Player")
         {
             var controller = collision.gameObject.GetComponent<Player_HitSensor>().controller;
+            var a = controller.GetData().IsDied();
+            var b = controller.GetFaceTo();
+            var c = behavior.RB.linearVelocity;
+
 
             //是撞到別人
             if (!controller.GetData().IsDied() && controller.GetData().index != behavior.ItemInfo.PlayerIndex)
