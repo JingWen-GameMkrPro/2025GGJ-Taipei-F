@@ -26,9 +26,7 @@ public class BubbleRebackDetector : MonoBehaviour
                 }
                 else
                 {
-                    var types = new List<ItemManager.InteractType>();
-                    types.Add(ItemManager.InteractType.SpeedDown);
-                    collision.gameObject.GetComponent<PlayerController>().TriggerHit(types);
+                    behavior.SpeedDown(collision.gameObject);
                 }
             }
         }

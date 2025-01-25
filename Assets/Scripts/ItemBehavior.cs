@@ -32,7 +32,6 @@ public class ItemBehavior: MonoBehaviour
         RB.linearVelocity = Vector2.zero;
 
         var effect = Instantiate(BoomEffect);
-        //effect.transform.SetParent(transform);
         effect.transform.position = this.transform.position;
         effect.GetComponent<ParticleSystem>().Play();
 
@@ -60,6 +59,15 @@ public class ItemBehavior: MonoBehaviour
     {
         ItemInfo.PlayerIndex = newPlayerIndex;
         RB.linearVelocity = -RB.linearVelocity;
+    }
+
+    public void SpeedDown(GameObject target)
+    {
+        var types = new List<ItemManager.InteractType>();
+        types.Add(ItemManager.InteractType.SpeedDown);
+        target.GetComponent<PlayerController>().TriggerHit(types);
+
+        Destroy(this.gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
