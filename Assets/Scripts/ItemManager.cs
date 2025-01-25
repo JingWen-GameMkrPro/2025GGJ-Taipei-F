@@ -2,9 +2,7 @@ using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class ItemManager : MonoBehaviour
 {
@@ -76,7 +74,7 @@ public class ItemManager : MonoBehaviour
 
 
     //玩家本身主動使用道具，先進先出
-    public void UseItem(int playerIndex, ItemInfo itemInfo)
+    public void UseItem(ItemInfo itemInfo)
     {
         //if (PlayerItems[playerIndex].Count > 0)
         //{
@@ -91,6 +89,7 @@ public class ItemManager : MonoBehaviour
         //            return;
         //    }
         //}
+
         var instance = Instantiate(BubblePrefab);
         instance.GetComponent<ItemBehavior>().Invoke(itemInfo);
     }
