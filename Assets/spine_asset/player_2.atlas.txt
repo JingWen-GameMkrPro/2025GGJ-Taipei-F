@@ -1,0 +1,8 @@
+player_2.png
+size:606,404
+filter:Linear,Linear
+pma:true
+player_2_back
+bounds:2,2,300,400
+player_2_body
+bounds:304,2,300,400
