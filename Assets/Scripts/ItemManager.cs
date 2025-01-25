@@ -32,13 +32,14 @@ public class ItemManager : MonoBehaviour
 
     public struct ItemInfo
     {
+        public int PlayerIndex;
         public GameObject Owner;
         public  Vector2 Position;
         public  Vector2 Direction;
         public  float Speed;
     }
 
-    Queue<ItemType> PlayerItems = new Queue<ItemType>();
+    List<Queue<ItemType>> PlayerItems = new List<Queue<ItemType>>();
 
 
     public GameObject BubbleIconPrefab;
@@ -59,9 +60,9 @@ public class ItemManager : MonoBehaviour
     }
 
     //道具本身通知道具管理者玩家撿拾道具
-    public void PickUpItem(ItemType type)
+    public void PickUpItem(int playerIndex , ItemType type)
     {
-        PlayerItems.Enqueue(type);
+        PlayerItems[playerIndex].Enqueue(type);
     }
 
 
@@ -70,7 +71,7 @@ public class ItemManager : MonoBehaviour
     {
         if(PlayerItems.Count > 0)
         {
-            var item = PlayerItems.Dequeue();
+            var item = PlayerItems[itemInfo.PlayerIndex].Dequeue();
             switch (item)
             {
                 case ItemType.Bubble:
