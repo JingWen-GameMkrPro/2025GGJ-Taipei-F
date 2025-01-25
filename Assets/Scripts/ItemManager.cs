@@ -44,11 +44,16 @@ public class ItemManager : MonoBehaviour
         public  float Speed;
     }
 
-    List<Queue<ItemType>> PlayerItems = new List<Queue<ItemType>>();
+    Queue<ItemType>[] PlayerItems = new Queue<ItemType>[4]
+    {
+        new Queue<ItemType>(),
+        new Queue<ItemType>(),
+        new Queue<ItemType>(),
+        new Queue<ItemType>()
+    };
 
     public GameObject BubbleIconPrefab;
     public GameObject BubblePrefab;
-
 
     //系統生成Icon，可以指定Type
     public void CreateItemIconInMap(ItemType type)
@@ -71,9 +76,9 @@ public class ItemManager : MonoBehaviour
 
 
     //玩家本身主動使用道具，先進先出
-    public void UseItem(ItemInfo itemInfo)
+    public void UseItem(int playerIndex, ItemInfo itemInfo)
     {
-        if(PlayerItems.Count > 0)
+        if (PlayerItems[playerIndex].Count > 0)
         {
             var item = PlayerItems[itemInfo.PlayerIndex].Dequeue();
             switch (item)
