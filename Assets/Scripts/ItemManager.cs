@@ -1,6 +1,8 @@
 using NUnit.Framework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -24,39 +26,62 @@ public class ItemManager : MonoBehaviour
 
     public enum ItemType
     {
-        Bubble = 0
+        Bubble = 0,
+        SpeedUp = 1,
     }
 
-    List<(GameObject, ItemBehavior, ItemType)> AllItems = new();
+    public struct ItemInfo
+    {
+        public GameObject Owner;
+        public  Vector2 Position;
+        public  Vector2 Direction;
+        public  float Speed;
+    }
 
+    Queue<ItemType> PlayerItems = new Queue<ItemType>();
+
+
+    public GameObject BubbleIconPrefab;
     public GameObject BubblePrefab;
 
-    public GameObject Create(ItemType type)
+
+    //系統生成Icon，可以指定Type
+    public void CreateItemIconInMap(ItemType type)
     {
         switch(type)
         {
             case ItemType.Bubble:
-                var instance = Instantiate(BubblePrefab);
-                AllItems.Add((instance, instance.GetComponent<ItemBehavior>(), ItemType.Bubble));
-                return instance;
+                Instantiate(BubbleIconPrefab);
+                return;
             default:
-                return null;
+                return;
         }
     }
 
-
-    public void Invoke(GameObject target)
+    //道具本身通知道具管理者玩家撿拾道具
+    public void PickUpItem(ItemType type)
     {
-        foreach (var item in AllItems)
+        PlayerItems.Enqueue(type);
+    }
+
+
+    //玩家本身主動使用道具，先進先出
+    public void UseItem(ItemInfo itemInfo)
+    {
+        if(PlayerItems.Count > 0)
         {
-            if(item.Item1 == target)
+            var item = PlayerItems.Dequeue();
+            switch (item)
             {
-                Debug.Log($"{target.name} is in the list.");
-                item.Item2.Shoot(Vector2.right, 10f);
-                return;
+                case ItemType.Bubble:
+                    var instance = Instantiate(BubblePrefab);
+                    instance.GetComponent<ItemBehavior>().Invoke(itemInfo);
+                    return;
+                default:
+                    return;
             }
         }
-
-        Debug.LogError("This Item is not existing！");
     }
 }
+
+//

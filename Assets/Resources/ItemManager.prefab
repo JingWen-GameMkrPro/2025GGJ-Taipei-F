@@ -44,4 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 011ad187e6ba06042999c6d66e7fa478, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BubblePrefab: {fileID: 1902143214718836162, guid: 2ac6027bfee8edb4890ad2d3ef642f43, type: 3}
+  BubbleIconPrefab: {fileID: 1902143214718836162, guid: 2ac6027bfee8edb4890ad2d3ef642f43, type: 3}
+  BubblePrefab: {fileID: 1902143214718836162, guid: 38d0e7f9c30a6004e88bde906e2811c7, type: 3}
