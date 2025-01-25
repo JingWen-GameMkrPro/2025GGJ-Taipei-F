@@ -1,7 +1,6 @@
 using UnityEngine;
-using static ItemManager;
 
-public class Spike : MonoBehaviour
+public class BlockBubblePlugin : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -11,7 +10,7 @@ public class Spike : MonoBehaviour
         if (collisionTag == "Bubble")
         {
             //Åý¥LÃz¬µ
-            collision.gameObject.GetComponent<ItemBehavior>().Boom();
+            collision.gameObject.GetComponent<ItemBehavior>().Block();
         }
     }
 }
