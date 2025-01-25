@@ -1,0 +1,8 @@
+skeleton.png
+size:606,404
+filter:Linear,Linear
+pma:true
+player_0_back
+bounds:2,2,300,400
+player_0_body
+bounds:304,2,300,400
