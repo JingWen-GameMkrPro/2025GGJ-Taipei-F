@@ -38,7 +38,9 @@ public class ItemBehavior: MonoBehaviour
 
         foreach (GameObject player in boomRangePlayers)
         {
-            //©I¥s¶Ë®`ª±®a¨ç¦¡
+            var types = new List<ItemManager.InteractType>();
+            types.Add(ItemManager.InteractType.Boom);
+            player.GetComponent<PlayerController>().TriggerHit(types);
         }
 
         Destroy(this.gameObject);
