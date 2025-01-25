@@ -1,7 +1,20 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Utility;
 
-public class PlayerPanel : MonoBehaviour
+public struct PlayerInfo
+{
+    public int currentHealth;
+    public int kill;
+    public int ammo;
+}
+
+public struct PlayerJoinInfo
+{
+    public int maxHealth;
+}
+
+public class PlayerPanel : MonoBehaviour, IObserver<PlayerInfo>, IObserver<PlayerJoinInfo>
 {
     public int playerIndex;
     [SerializeField] private Slider hpSlider;
@@ -9,32 +22,24 @@ public class PlayerPanel : MonoBehaviour
     [SerializeField] private Text ammoNumText;
     [SerializeField] GameObject joinedUI;
     [SerializeField] GameObject notJoinedUI;
-    public bool isJoin = false;
+    private bool _isJoined = false;
+    private int maxHealth = 0;
 
-    public float hpPortion = 1;
-    public int kills = 0;
-    public int ammo = 999;
-
-    private void Update()
+    void IObserver<PlayerInfo>.Update(PlayerInfo data)
     {
-        updatePlayerUI(hpPortion, kills, ammo);
-    }
-
-    public void updatePlayerUI(float hpPortion, int kills, int ammo)
-    {
-        if (isJoin)
+        if (_isJoined)
         {
-            hpSlider.value = hpPortion;
-            killNumText.text = "Kill¡G" + kills;
-            ammoNumText.text = "x 999";//¼È®É¼g¦º
+            hpSlider.value = data.currentHealth;
+            killNumText.text = data.kill.ToString();
+            ammoNumText.text = data.ammo.ToString();
         }
     }
 
-    public void playerJoin()
+    void IObserver<PlayerJoinInfo>.Update(PlayerJoinInfo data)
     {
-        Debug.Log("Player " + playerIndex + "join the game!");
+        maxHealth = data.maxHealth;
         notJoinedUI.SetActive(false);
         joinedUI.SetActive(true);
-        isJoin = true;
+        _isJoined = true;
     }
 }
