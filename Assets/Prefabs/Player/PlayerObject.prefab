@@ -276,9 +276,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 915213084521049126}
     m_Modifications:
+    - target: {fileID: 924887781297989299, guid: 170327c4fc89e574cba6dddf3752433a, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 1253177570477076797, guid: 170327c4fc89e574cba6dddf3752433a, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1253177570477076797, guid: 170327c4fc89e574cba6dddf3752433a, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310602999747983184, guid: 170327c4fc89e574cba6dddf3752433a, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3772810433876729271, guid: 170327c4fc89e574cba6dddf3752433a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -328,6 +340,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4888655137398804457, guid: 170327c4fc89e574cba6dddf3752433a, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5171415513888131289, guid: 170327c4fc89e574cba6dddf3752433a, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 5213020660104180814, guid: 170327c4fc89e574cba6dddf3752433a, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -375,6 +395,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 915213084521049126}
     m_Modifications:
+    - target: {fileID: 234708330827085377, guid: d7facffa5033b3242a8b98dcbeea43de, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2889088984686792686, guid: d7facffa5033b3242a8b98dcbeea43de, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 3216288563684857540, guid: d7facffa5033b3242a8b98dcbeea43de, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -411,9 +439,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5463713496021657752, guid: d7facffa5033b3242a8b98dcbeea43de, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 6490347272609835172, guid: d7facffa5033b3242a8b98dcbeea43de, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6490347272609835172, guid: d7facffa5033b3242a8b98dcbeea43de, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916913379817131973, guid: d7facffa5033b3242a8b98dcbeea43de, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7428447180831456027, guid: d7facffa5033b3242a8b98dcbeea43de, type: 3}
       propertyPath: m_Name
