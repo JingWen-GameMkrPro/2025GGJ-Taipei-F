@@ -263,7 +263,7 @@ public class PlayerData{
         this.device = device;
         this.index = index;
         this.hp = 100;
-        this.speed = 50;
+        this.speed = 40;
         this.canMove = true;
         this.playerController = playerController;
     }
