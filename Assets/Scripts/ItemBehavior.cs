@@ -1,10 +1,10 @@
 using System.Collections.Generic;
+using System.Drawing;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 using static ItemManager;
-using static UnityEngine.Rendering.DebugUI;
 
 public class ItemBehavior: MonoBehaviour
 {
@@ -115,19 +115,21 @@ public class ItemBehavior: MonoBehaviour
 
     public void ChangeColor(int index)
     {
+        var renderer = this.gameObject.GetComponent<SpriteRenderer>();
+
         switch(index)
         {
             case 0:
-                this.GetComponent<SpriteRenderer>().color = Color.red;
+                renderer.color = new UnityEngine.Color(1f, 0f, 0f, 1f); 
                 break;
             case 1:
-                this.GetComponent<SpriteRenderer>().color = Color.green;
+                renderer.color = new UnityEngine.Color(0f, 1f, 0f, 1f);
                 break;
             case 2:
-                this.GetComponent<SpriteRenderer>().color = Color.blue;
+                renderer.color = new UnityEngine.Color(0f, 0f, 1f, 1f);
                 break;
             case 3:
-                this.GetComponent<SpriteRenderer>().color = Color.yellow;
+                renderer.color = new UnityEngine.Color(1f, 1f, 0f, 1f);
                 break;
             default:
                 break;
