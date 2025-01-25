@@ -13,13 +13,17 @@ public class PlayerController : MonoBehaviour {
     PlayerInput playerInput;
 
     [Header("Character")]
-    public CharacterController controller;
-    public SpriteRenderer spriteRenderer;
-    public List<Material> playerMat; 
+    [SerializeField] CharacterController controller;
+    //[SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] List<Material> playerMat;
+    [SerializeField] PlayerAnimation aniControl;
 
     #region Self
     [SerializeField]
     Vector2 move = Vector2.zero;
+
+    [SerializeField]
+    Vector2 faceto = Vector2.left;
 
     [SerializeField]
     long lastDefenceTick = 0;
@@ -40,7 +44,7 @@ public class PlayerController : MonoBehaviour {
 
         data = new PlayerData(playerInput.devices[0], indexCount++, this);
 
-        spriteRenderer.material = playerMat[data.index];
+        //spriteRenderer.material = playerMat[data.index];
 
         //Regis
 
@@ -64,13 +68,36 @@ public class PlayerController : MonoBehaviour {
             (x > 0.1f && y < -0.1f) ||
             (x < -0.1f && y > 0.1f)) {
 
-            finalMov.x = x * Mathf.Sqrt(0.5f);
-            finalMov.y = y * Mathf.Sqrt(0.5f); 
+            x = x * Mathf.Sqrt(0.5f);
+            y = y * Mathf.Sqrt(0.5f); 
         }
+
+        finalMov.x = x;
+        finalMov.y = y;
 
         if (controller != null) {
             controller.Move(finalMov);
         }
+
+        //face where
+        //優先上下
+        //再左右
+        int faceType = -1;
+        if (y >= 0.001f) {
+            faceto = Vector2.up;
+            faceType = 0;
+        } else if (y <= -0.001f) {
+            faceto = Vector2.down;
+            faceType = 1;
+        } else if (x >= 0.001f) {
+            faceto = Vector2.right;
+            faceType = 2;
+        } else if (x <= -0.001f) {
+            faceto = Vector2.left;
+            faceType = 3;
+        }
+
+        aniControl.UpdateState(finalMov, faceType);
     }
 
     public void DoMove(InputAction.CallbackContext ctx) {
