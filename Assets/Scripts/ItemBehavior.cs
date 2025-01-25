@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.VisualScripting;
+using UnityEditor.Rendering;
 using UnityEngine;
 using static ItemManager;
 using static UnityEngine.Rendering.DebugUI;
@@ -16,6 +17,8 @@ public class ItemBehavior: MonoBehaviour
     [HideInInspector]
     public Animator Animator;
 
+    public GameObject BoomEffect;
+
     public void SetAnimatorIndex(int index)
     {
         Animator.SetInteger("Index", index);
@@ -28,10 +31,19 @@ public class ItemBehavior: MonoBehaviour
         SetAnimatorIndex(1);
         RB.linearVelocity = Vector2.zero;
 
+        var effect = Instantiate(BoomEffect);
+        //effect.transform.SetParent(transform);
+        effect.transform.position = this.transform.position;
+        effect.GetComponent<ParticleSystem>().Play();
+
         foreach (GameObject player in boomRangePlayers)
         {
             //©I¥s¶Ë®`ª±®a¨ç¦¡
         }
+
+        Destroy(this.gameObject);
+
+
     }
 
     public void Bounce()

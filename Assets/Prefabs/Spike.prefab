@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5433155057586677953}
   - component: {fileID: 3065487773198221997}
   - component: {fileID: 2331733830416698234}
-  - component: {fileID: 767521099482971870}
   m_Layer: 0
   m_Name: Spike
   m_TagString: Spike
@@ -29,9 +28,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8.04, y: -0.03, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5717915011276042326}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3065487773198221997
@@ -78,8 +78,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 0.408805, g: 0.408805, b: 0.408805, a: 1}
+  m_Sprite: {fileID: 1533219502706048892, guid: e1fc9d2bd0c260b4b8385ec4dab9c791, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -125,15 +125,65 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0.21133333}
   m_Radius: 0.5
---- !u!114 &767521099482971870
-MonoBehaviour:
+--- !u!1001 &3850608040787445941
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5433155057586677953}
+    m_Modifications:
+    - target: {fileID: 1087452660507854509, guid: 337888203fd57df4eb8b73243d328dab, type: 3}
+      propertyPath: m_Name
+      value: BoomBubblePlugin
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802856070828357859, guid: 337888203fd57df4eb8b73243d328dab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802856070828357859, guid: 337888203fd57df4eb8b73243d328dab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802856070828357859, guid: 337888203fd57df4eb8b73243d328dab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802856070828357859, guid: 337888203fd57df4eb8b73243d328dab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802856070828357859, guid: 337888203fd57df4eb8b73243d328dab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802856070828357859, guid: 337888203fd57df4eb8b73243d328dab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802856070828357859, guid: 337888203fd57df4eb8b73243d328dab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802856070828357859, guid: 337888203fd57df4eb8b73243d328dab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802856070828357859, guid: 337888203fd57df4eb8b73243d328dab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802856070828357859, guid: 337888203fd57df4eb8b73243d328dab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 337888203fd57df4eb8b73243d328dab, type: 3}
+--- !u!4 &5717915011276042326 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8802856070828357859, guid: 337888203fd57df4eb8b73243d328dab, type: 3}
+  m_PrefabInstance: {fileID: 3850608040787445941}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7515500571893124084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91ba3d27d0d6b0147818b53145efe4b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
