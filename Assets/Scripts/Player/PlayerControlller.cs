@@ -107,43 +107,66 @@ public class PlayerController : MonoBehaviour {
         aniControl.UpdateState(finalMov, faceType);
     }
 
+    void HandleAttack() {
+
+    }
+
+    void HandleDamage(int v) {
+        data.ModifyHP(v);
+    }
+
+    void HandleSpeedModify(int v) {
+        data.ModifySpeed(v);
+    }
+
+    #region Input
+
     public void DoMove(InputAction.CallbackContext ctx) {
+        if (data.IsDied() || !data.canMove) {
+            return;
+        }
         move = ctx.ReadValue<Vector2>();
         move = move * Time.deltaTime * data.speed;
     }
 
     public void DoAttack(InputAction.CallbackContext ctx) {
         if (ctx.performed == false) {
-            StopVibrate();
+            return;
+        }
+        if (data.IsDied()) {
             return;
         }
         Debug.Log("DoAttack");
-        TrggerVibrate(0.1f, 0.5f);
+        HandleAttack();
     }
 
     public void DoDefence(InputAction.CallbackContext ctx) {
         if (ctx.performed == false) {
-            StopVibrate();
+            return;
+        }
+        if (data.IsDied()) {
             return;
         }
         Debug.Log("DoDefence");
 
         lastDefenceTick = System.DateTime.Now.Ticks;
-        TrggerVibrate(0.1f, 0.5f);
     }
 
-    void TrggerVibrate(float low, float high) {
-        if (Gamepad.current != null) {
-            //Gamepad.current.SetMotorSpeeds(low, high);
-        }
-    }
+    #endregion
 
-    void StopVibrate() {
-        if (data.device != null) {
-            //data.device.ResetHaptics();
-        }
-    }
+    //void TrggerVibrate(float low, float high) {
+    //    if (Gamepad.current != null) {
+    //        //Gamepad.current.SetMotorSpeeds(low, high);
+    //    }
+    //}
 
+    //void StopVibrate() {
+    //    if (data.device != null) {
+    //        //data.device.ResetHaptics();
+    //    }
+    //}
+
+    #region Public Functon
     public PlayerData GetData() {
         return data;
     }
@@ -156,8 +179,22 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void TriggerHit(List<ItemManager.InteractType> typeList) {
-
+        foreach (ItemManager.InteractType type in typeList) {
+            switch (type) {
+                case ItemManager.InteractType.Boom:
+                    HandleDamage(10);
+                    break;
+                case ItemManager.InteractType.SpeedDown:
+                    HandleSpeedModify(-2);
+                    break;
+                case ItemManager.InteractType.SpeedUp:
+                    HandleSpeedModify(2);
+                    break;
+            }
+        }
     }
+
+    #endregion
 }
 
 public class PlayerData{
@@ -177,5 +214,22 @@ public class PlayerData{
         this.speed = 5;
         this.canMove = true;
         this.playerController = playerController;
+    }
+
+    public void ModifyHP(int v) {
+        hp += v;
+        if (hp <= 0) {
+            hp = 0;
+        }
+    }
+    public void ModifySpeed(int v) {
+        speed += v;
+        if (speed <= 0) {
+            speed = 0;
+        }
+    }
+
+    public bool IsDied() {
+        return hp <= 0;
     }
 }
