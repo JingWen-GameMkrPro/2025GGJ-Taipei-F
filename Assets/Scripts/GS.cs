@@ -15,6 +15,6 @@ public class GS: MonoBehaviour
         itemInfo.Position = new Vector2(0, 0);
         itemInfo.Direction = Vector2.right;
         itemInfo.Speed = 20;
-        ItemManager.Instance.UseItem(0, itemInfo);
+        ItemManager.Instance.UseItem(itemInfo);
     }
 }
