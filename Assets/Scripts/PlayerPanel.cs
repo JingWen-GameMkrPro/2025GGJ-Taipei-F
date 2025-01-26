@@ -48,6 +48,9 @@ public class PlayerPanel : MonoBehaviour, IObserver<PlayerInfo>, IObserver<Playe
 			hpSlider.value = maxHealth > 0 ? (float)data.currentHealth / maxHealth : (float)data.currentHealth / 100;
 			killNumText.text = data.kill.ToString();
 			ammoNumText.text = data.ammo.ToString();
+
+			notJoinedUI.SetActive(false);
+			joinedUI.SetActive(true);
 		}
 	}
 
