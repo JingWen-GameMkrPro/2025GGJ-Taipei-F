@@ -175,11 +175,12 @@ namespace GamePlay
 		}
 		public void UseItem(int playerIndex, ItemManager.ItemInfo itemInfo)
 		{
-			throw new System.NotImplementedException();
+			UpdatePlayerInfo();
 		}
 		public void Register(IObserver<PlayerInfo> observer)
 		{
 			_playerInfoObservers.Add(observer);
+			UpdatePlayerInfo();
 		}
 		public void Deregister(IObserver<PlayerInfo> observer)
 		{
