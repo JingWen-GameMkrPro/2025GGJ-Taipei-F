@@ -171,7 +171,7 @@ namespace GamePlay
 		}
 		public void PickUpItem(int playerIndex, ItemManager.ItemType type)
 		{
-			throw new System.NotImplementedException();
+			UpdatePlayerInfo();
 		}
 		public void UseItem(int playerIndex, ItemManager.ItemInfo itemInfo)
 		{

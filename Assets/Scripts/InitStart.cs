@@ -13,7 +13,7 @@ namespace GamePlay
 			var timerManager = timerManagerGO.AddComponent<TimerManager>();
 			var battleManager = new BattleManager(stateManager, timerManager);
 			var matchManager = new MatchManager(stateManager);
-			var gameFlow = new GameFlow(stateManager);
+			var gameFlow = new GameFlow(timerManager, stateManager);
 
 			SystemService.AddService<IStateManager>(stateManager);
 			SystemService.AddService<IMatchManager>(matchManager);

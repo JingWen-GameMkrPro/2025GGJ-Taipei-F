@@ -97,7 +97,11 @@ namespace GamePlay
 		}
 		private void Init()
 		{
-			_playerDict.Clear();
+            foreach (var playerData in _playerDict.Values)
+            {
+				playerData.matchStatus = MatchStatus.NotReady;
+				playerData.Respawn();
+			}
 			_joinObservers.Clear();
 			Debug.Log("Init MathManager");
 		}
