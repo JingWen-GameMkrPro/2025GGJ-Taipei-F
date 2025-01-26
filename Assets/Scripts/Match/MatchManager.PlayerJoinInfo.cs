@@ -29,7 +29,7 @@ namespace GamePlay
 		{
 			var joinInfo = new PlayerJoinInfo();
 			//TODO: don't use magic number
-			joinInfo.maxHealth = 3;
+			joinInfo.maxHealth = 100;
 			return joinInfo;
 		}
 	}

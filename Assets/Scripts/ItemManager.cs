@@ -1,8 +1,11 @@
+using GamePlay;
 using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
+using Utility;
 
 public class ItemManager : MonoBehaviour
 {
@@ -55,16 +58,15 @@ public class ItemManager : MonoBehaviour
     public GameObject BubblePrefab;
 
     //系統生成Icon，可以指定Type
-    public void CreateItemIconInMap(ItemType type)
+    public GameObject CreateItemIconInMap(ItemType type)
     {
         SoundManager.Instance.PlaySoundEffect(SoundEffectType.Spawn);
         switch(type)
         {
             case ItemType.Bubble:
-                Instantiate(BubbleIconPrefab);
-                return;
+                return Instantiate(BubbleIconPrefab);
             default:
-                return;
+                return null;
         }
     }
 
@@ -72,35 +74,61 @@ public class ItemManager : MonoBehaviour
     public void PickUpItem(int playerIndex , ItemType type)
     {
         PlayerItems[playerIndex].Enqueue(type);
+        if (SystemService.TryGetService<IBattleManager>(out IBattleManager battleManager) == false)
+        {
+            return;
+        }
+        //_pController.GetPlayerAnimation().PlayHurtAnimation();
+        battleManager.PickUpItem(playerIndex, type);
+
     }
 
 
     //玩家本身主動使用道具，先進先出
     public void UseItem(ItemInfo itemInfo)
     {
-        //if (PlayerItems[itemInfo.PlayerIndex].Count > 0)
-        //{
-        //    var item = PlayerItems[itemInfo.PlayerIndex].Dequeue();
-        //    switch (item)
-        //    {
-        //        case ItemType.Bubble:
-        //            var instance = Instantiate(BubblePrefab);
-        //            instance.GetComponent<ItemBehavior>().Invoke(itemInfo);
-        //            return;
-        //        default:
-        //            return;
-        //    }
-        //}
+        if (PlayerItems[itemInfo.PlayerIndex].Count > 0)
+        {
+            var item = PlayerItems[itemInfo.PlayerIndex].Dequeue();
+            switch (item)
+            {
+                case ItemType.Bubble:
+                    var instance = Instantiate(BubblePrefab);
+                    instance.GetComponent<ItemBehavior>().Invoke(itemInfo);
+                    return;
+                default:
+                    return;
+            }
+        }
 
-        var instance = Instantiate(BubblePrefab);
-        instance.GetComponent<ItemBehavior>().Invoke(itemInfo);
-        SoundManager.Instance.PlaySoundEffect(SoundEffectType.Shoot);
+        //var instance = Instantiate(BubblePrefab);
+        //instance.GetComponent<ItemBehavior>().Invoke(itemInfo);
+        //SoundManager.Instance.PlaySoundEffect(SoundEffectType.Shoot);
     }
 
     public int GetPlayerBubbleCount(int playerIndex)
     {
         return PlayerItems[playerIndex].Count;
     }
+
+    public void ResetAllPlayerBubble()
+    {
+        PlayerItems = new Queue<ItemType>[4]
+        {
+                new Queue<ItemType>(),
+                new Queue<ItemType>(),
+                new Queue<ItemType>(),
+                new Queue<ItemType>()
+        };
+
+    }
+    public void ResetPlayerBubble(int index)
+    {
+        PlayerItems[index] = new Queue<ItemType>();
+    }
+
+
+
 }
 
 //

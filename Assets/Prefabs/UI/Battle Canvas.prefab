@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4075313837960367697}
   - component: {fileID: 2004903622658083694}
-  - component: {fileID: 2795308480493998798}
   m_Layer: 5
   m_Name: Player Panel
   m_TagString: Untagged
@@ -67,24 +66,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &2795308480493998798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2044500313772058852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bec857b68cc3ce94abc9874d3ad9e748, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerIndex: 0
-  hpSlider: {fileID: 0}
-  killNumText: {fileID: 0}
-  ammoNumText: {fileID: 0}
-  joinedUI: {fileID: 0}
-  notJoinedUI: {fileID: 0}
 --- !u!1 &4466997028780483173
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,6 +354,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1614774874474501841, guid: 4e60618125c2daa42be2763f3f0f11a4, type: 3}
+      propertyPath: playerIndex
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3398897936802994771, guid: 4e60618125c2daa42be2763f3f0f11a4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -609,6 +594,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1614774874474501841, guid: 4e60618125c2daa42be2763f3f0f11a4, type: 3}
+      propertyPath: playerIndex
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3398897936802994771, guid: 4e60618125c2daa42be2763f3f0f11a4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -734,6 +723,10 @@ PrefabInstance:
     - target: {fileID: 803632779227613919, guid: 4e60618125c2daa42be2763f3f0f11a4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1614774874474501841, guid: 4e60618125c2daa42be2763f3f0f11a4, type: 3}
+      propertyPath: playerIndex
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3398897936802994771, guid: 4e60618125c2daa42be2763f3f0f11a4, type: 3}
       propertyPath: m_Pivot.x

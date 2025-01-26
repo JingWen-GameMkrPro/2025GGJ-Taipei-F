@@ -896,6 +896,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   faceup: 0
+  isDied: 0
   bodyList:
   - {fileID: 3955628575712760539}
   - {fileID: 8052522768125172455}
@@ -925,7 +926,6 @@ MonoBehaviour:
   armType: 3
   hurtTime: 0.3
   hurtColor: {r: 1, g: 0, b: 0, a: 1}
-  _meshRenderer: {fileID: 0}
 --- !u!1 &5124420007491091911
 GameObject:
   m_ObjectHideFlags: 0
@@ -1156,7 +1156,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4393076615043850208
 Transform:
   m_ObjectHideFlags: 0
