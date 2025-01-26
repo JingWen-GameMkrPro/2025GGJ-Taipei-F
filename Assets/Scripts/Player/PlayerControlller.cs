@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using System.Collections;
-using System.Text.RegularExpressions;
 using GamePlay;
 using Utility;
 
@@ -39,7 +38,7 @@ public class PlayerController : MonoBehaviour {
 
         //Regis
         if(SystemService.TryGetService<IMatchManager>(out IMatchManager matchManager) == false){
-
+            Destroy(gameObject);
         }
         matchManager.Join(data);
         
@@ -62,28 +61,40 @@ public class PlayerController : MonoBehaviour {
         HandleMove();
     }
 
+    void UpdateBehavior(){
+        switch(data.matchStatus){
+            case MatchStatus.NotReady:
+            case MatchStatus.Ready:
+                playerBehavior = new PlayerLobbyBehavior();
+                break;
+            case MatchStatus.Battle:
+                playerBehavior = new PlayerGameBehavior();
+                break;
+        }
+    }
+
     void HandleMove() {
-        playerBehavior = new PlayerGameBehavior();
+        UpdateBehavior();
         playerBehavior.HandleMove(this);
     }
 
     void HandleAttack() {
-        playerBehavior = new PlayerGameBehavior();
+        UpdateBehavior();
         playerBehavior.HandleAttack(this);
     }
 
     void HandleDamage(int v) {
-        playerBehavior = new PlayerGameBehavior();
+        UpdateBehavior();
         playerBehavior.HandleDamage(this, v);
     }
 
     void HandleSpeedModify(int v) {
-        playerBehavior = new PlayerGameBehavior();
+        UpdateBehavior();
         playerBehavior.HandleSpeedModify(this, v);
     }
 
     void HandleHint() {
-        playerBehavior = new PlayerGameBehavior();
+        UpdateBehavior();
         playerBehavior.HandleHint(this);
     }
 
@@ -151,7 +162,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void TriggerHit(List<ItemManager.InteractType> typeList) {
-        playerBehavior = new PlayerGameBehavior();
+        UpdateBehavior();
         playerBehavior.TriggerHit(this, typeList);
     }
 

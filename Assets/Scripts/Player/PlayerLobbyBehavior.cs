@@ -1,5 +1,6 @@
 using System.Collections.Generic;
-using UnityEngine;
+using GamePlay;
+using Utility;
 
 public class PlayerLobbyBehavior : IPlayerBehavior
 {
@@ -12,7 +13,13 @@ public class PlayerLobbyBehavior : IPlayerBehavior
     }
 
     public void HandleAttack(PlayerController _pController) {
-        /*Do Nothing in Lobby*/
+        // Ready!
+        if(_pController.GetData().matchStatus == GamePlay.MatchStatus.NotReady){
+            if(SystemService.TryGetService<IMatchManager>(out IMatchManager matchManager) == false){
+                return;
+            }
+            matchManager.Ready(_pController.GetData().index);
+        }
     }
 
     public void HandleDamage(PlayerController _pController, int v) {
