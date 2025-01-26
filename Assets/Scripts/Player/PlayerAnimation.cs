@@ -41,7 +41,7 @@ public class PlayerAnimation : MonoBehaviour
 
     void HandleAnimation() {
         foreach (GameObject obj in bodyList) {
-            if (obj.activeSelf == true && obj.GetComponent<Animator>() != null) {
+            if (obj.activeSelf == true && obj.activeInHierarchy == true && obj.GetComponent<Animator>() != null) {
                 obj.GetComponent<Animator>().SetBool("face", faceup);
                 obj.GetComponent<Animator>().SetFloat("speed", speed);
             }
