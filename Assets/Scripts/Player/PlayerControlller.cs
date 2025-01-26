@@ -290,7 +290,7 @@ public class PlayerData{
         }
         // 1 tick = 0.0000001 sec
         // 1000000 ticks = 0.1 sec
-        long safeDefenceTime = 5000000;
+        long safeDefenceTime = 10000000;
         return System.DateTime.Now.Ticks - lastDefenceTick < safeDefenceTime;
     }
 
