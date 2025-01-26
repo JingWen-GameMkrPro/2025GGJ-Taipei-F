@@ -9,6 +9,7 @@ namespace GamePlay
 		public void Register(IObserver<PlayerJoinInfo> observer)
 		{
 			_joinObservers.Add(observer);
+			NotifyJoin();
 		}
 		public void Deregister(IObserver<PlayerJoinInfo> observer)
 		{
