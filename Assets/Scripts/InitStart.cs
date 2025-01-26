@@ -20,8 +20,6 @@ namespace GamePlay
 			SystemService.AddService<GameFlow>(gameFlow);
 			SystemService.AddService<ITimerManager>(timerManager);
 			SystemService.AddService<IBattleManager>(battleManager);
-
-			stateManager.ChangeState<MatchState>();
 		}
 
 		public void StartGame()
