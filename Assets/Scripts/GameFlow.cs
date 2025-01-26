@@ -8,7 +8,7 @@ namespace GamePlay
 		public GameFlow(IStateManager stateManager)
 		{
 			//TODO: 釋放空間、SceneName查表
-			stateManager.GetState<MatchState>().OnEnterState += () => ChangeScene("");
+			stateManager.GetState<MatchState>().OnEnterState += () => ChangeScene("Lobby");
 			stateManager.GetState<BattleState>().OnEnterState += () => ChangeScene("Level01");
 			stateManager.GetState<ResultState>().OnEnterState += () => ChangeScene("");
 		}
@@ -23,6 +23,7 @@ namespace GamePlay
 			if (Application.CanStreamedLevelBeLoaded(sceneName))
 			{
 				// 載入指定名稱的場景
+				Debug.Log($"Change scene to {sceneName}");
 				SceneManager.LoadScene(sceneName);
 			}
 			else
