@@ -52,16 +52,16 @@ public class PlayerGameBehavior : IPlayerBehavior{
         foreach (ItemManager.InteractType type in typeList) {
             switch (type) {
                 case ItemManager.InteractType.Damage:
-                    HandleDamage(_pController, -10, ownerIndex);
+                    HandleDamage(_pController, -40, ownerIndex);
                     break;
                 case ItemManager.InteractType.Boom:
-                    HandleDamage(_pController, -20, ownerIndex);
+                    HandleDamage(_pController, -60, ownerIndex);
                     break;
                 case ItemManager.InteractType.SpeedDown:
-                    HandleSpeedModify(_pController, -1);
+                    HandleSpeedModify(_pController, -5);
                     break;
                 case ItemManager.InteractType.SpeedUp:
-                    HandleSpeedModify(_pController, 1);
+                    HandleSpeedModify(_pController, 5);
                     break;
             }
         }
