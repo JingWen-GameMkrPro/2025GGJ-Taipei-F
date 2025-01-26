@@ -39,6 +39,8 @@ namespace GamePlay
 			{
 				//成功時再刷新資料
 				playerData.index = playerID;
+				//TODO: 要做配對狀態的檢查
+				playerData.matchStatus = MatchStatus.NotReady;
 				NotifyJoin(playerID);
 				return;
 			}
