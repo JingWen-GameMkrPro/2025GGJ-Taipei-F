@@ -166,6 +166,9 @@ public class PlayerController : MonoBehaviour {
         playerBehavior.TriggerHit(this, typeList);
     }
 
+    public void UpdatePosition(Vector2 pos){
+        transform.position = pos;
+    }
     #endregion
 }
 
@@ -274,10 +277,5 @@ public class PlayerData{
         // 1000000 ticks = 0.1 sec
         long safeDefenceTime = 10000000;
         return System.DateTime.Now.Ticks - lastDefenceTick < safeDefenceTime;
-    }
-
-    void Respawn() {
-        hp = 100;
-        canMove = true;
     }
 }

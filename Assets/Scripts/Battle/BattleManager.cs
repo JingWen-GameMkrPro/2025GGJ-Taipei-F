@@ -3,6 +3,12 @@ using Utility;
 
 namespace GamePlay
 {
+	public struct PlayerBattleInfo
+	{
+		public int Hp;
+		public int BulletCount;
+		public int KillCount;
+	}
 	public class BattleManager : IBattleManager
 	{
 		private IStateManager _stateManager;
@@ -37,6 +43,11 @@ namespace GamePlay
 			}
 		}
 
+		public void DoDamage(int attackerIndex, int playerIndex, int damage)
+		{
+			throw new System.NotImplementedException();
+		}
+
 		public void Register(IObserver<TimeInfo> observer)
 		{
 			_countdownObservers.Add(observer);
@@ -49,10 +60,9 @@ namespace GamePlay
 		{
 			throw new System.NotImplementedException();
 		}
-
-		public void UseItem(ItemManager.ItemInfo itemInfo)
-		{
-			throw new System.NotImplementedException();
-		}
-	}
+        public void UseItem(int playerIndex, ItemManager.ItemInfo itemInfo)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
 }
