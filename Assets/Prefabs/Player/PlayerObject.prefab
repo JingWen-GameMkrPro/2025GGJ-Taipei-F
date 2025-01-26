@@ -320,11 +320,6 @@ MonoBehaviour:
   - {fileID: 3776718328003416556}
   defenceHint: {fileID: 8051435529374448708}
   dieHint: {fileID: 8769554889719211419}
-  move: {x: 0, y: 0}
-  faceto: {x: -1, y: 0}
-  faceType: 3
-  lastDefenceTick: 0
-  isInitlized: 0
 --- !u!143 &6112366674546143757
 CharacterController:
   m_ObjectHideFlags: 0
@@ -349,7 +344,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Center: {x: 0, y: 0.35, z: 0}
 --- !u!114 &87035845183767444
 MonoBehaviour:
   m_ObjectHideFlags: 0
