@@ -299,6 +299,6 @@ public class PlayerData{
         speed = 50;
         canMove = true;
 
-        //ItemManager.Instance.ResetPlayer(index);
+        ItemManager.Instance.ResetPlayerBubble(index);
     }
 }
