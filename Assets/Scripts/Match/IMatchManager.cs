@@ -1,9 +1,11 @@
+using Utility;
+
 namespace GamePlay
 {
 	/// <summary>
 	/// 大廳服務，提供加入、準備、開始
 	/// </summary>
-	public interface IMatchManager
+	public interface IMatchManager : ISubject<PlayerJoinInfo>//, ISubject<PlayerInfo>
 	{
 		/// <summary>
 		/// 加入大廳
