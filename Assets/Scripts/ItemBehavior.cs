@@ -40,6 +40,7 @@ public class ItemBehavior: MonoBehaviour
     List<GameObject> boomRangePlayers = new();
     public void Boom()
     {
+        SoundManager.Instance.PlaySoundEffect(SoundEffectType.Explosion);
         SetAnimatorIndex(1);
         RB.linearVelocity = Vector2.zero;
 
@@ -81,6 +82,7 @@ public class ItemBehavior: MonoBehaviour
         types.Add(ItemManager.InteractType.SpeedDown);
         types.Add(ItemManager.InteractType.Damage);
         target.TriggerHit(types, ItemInfo.PlayerIndex);
+        SoundManager.Instance.PlaySoundEffect(SoundEffectType.Stick);
 
         Destroy(this.gameObject);
     }
@@ -114,6 +116,7 @@ public class ItemBehavior: MonoBehaviour
     {
         RB = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
+        LifeTime = 3f;
     }
 
 

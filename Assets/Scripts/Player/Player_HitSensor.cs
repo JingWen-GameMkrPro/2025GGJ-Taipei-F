@@ -5,6 +5,6 @@ public class Player_HitSensor : MonoBehaviour
     public PlayerController controller;
 
     public void step(){
-        controller.GetPlayerAnimation().step();
+        controller.GetPlayerAnimation().Step();
     }
 }

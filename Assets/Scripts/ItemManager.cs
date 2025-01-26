@@ -57,6 +57,7 @@ public class ItemManager : MonoBehaviour
     //系統生成Icon，可以指定Type
     public void CreateItemIconInMap(ItemType type)
     {
+        SoundManager.Instance.PlaySoundEffect(SoundEffectType.Emerge);
         switch(type)
         {
             case ItemType.Bubble:
@@ -93,6 +94,7 @@ public class ItemManager : MonoBehaviour
 
         var instance = Instantiate(BubblePrefab);
         instance.GetComponent<ItemBehavior>().Invoke(itemInfo);
+        SoundManager.Instance.PlaySoundEffect(SoundEffectType.Shoot);
     }
 }
 
