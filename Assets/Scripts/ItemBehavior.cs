@@ -95,7 +95,6 @@ public class ItemBehavior: MonoBehaviour
         //¡I¡I½T»{ª±®a±MÄÝTag
         if (collisionTag == "Player")
         {
-            Debug.Log("awsdaw");
             boomRangePlayers.Add(collision.gameObject);
         }
     }

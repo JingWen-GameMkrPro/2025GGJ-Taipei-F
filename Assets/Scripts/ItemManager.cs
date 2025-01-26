@@ -96,6 +96,11 @@ public class ItemManager : MonoBehaviour
         instance.GetComponent<ItemBehavior>().Invoke(itemInfo);
         SoundManager.Instance.PlaySoundEffect(SoundEffectType.Shoot);
     }
+
+    public int GetPlayerBubbleCount(int playerIndex)
+    {
+        return PlayerItems[playerIndex].Count;
+    }
 }
 
 //
