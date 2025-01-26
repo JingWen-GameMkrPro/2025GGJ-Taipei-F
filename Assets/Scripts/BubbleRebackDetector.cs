@@ -16,12 +16,12 @@ public class BubbleRebackDetector : MonoBehaviour
     //{
     //    var collisionTag = collision.gameObject.tag;
 
-    //    //¡I¡I½T»{ª±®a±MÄÝTag
+    //    //ï¿½Iï¿½Iï¿½Tï¿½{ï¿½ï¿½ï¿½aï¿½Mï¿½ï¿½Tag
     //    if (collisionTag == "Player")
     //    {
     //        var controller = collision.gameObject.GetComponent<Player_HitSensor>().controller;
 
-    //        //¬O¼²¨ì§O¤H
+    //        //ï¿½Oï¿½ï¿½ï¿½ï¿½Oï¿½H
     //        if (!controller.GetData().IsDied() && controller.GetData().index != behavior.ItemInfo.PlayerIndex)
     //        {
     //            if (controller.IsDefencing())
@@ -40,15 +40,15 @@ public class BubbleRebackDetector : MonoBehaviour
     {
         var collisionTag = collision.gameObject.tag;
 
-        //¡I¡I½T»{ª±®a±MÄÝTag
+        //ï¿½Iï¿½Iï¿½Tï¿½{ï¿½ï¿½ï¿½aï¿½Mï¿½ï¿½Tag
         if (collisionTag == "Player")
         {
             var controller = collision.gameObject.GetComponent<Player_HitSensor>().controller;
 
-            //¬O¼²¨ì§O¤H
+            //ï¿½Oï¿½ï¿½ï¿½ï¿½Oï¿½H
             if (!controller.GetData().IsDied() && controller.GetData().index != behavior.ItemInfo.PlayerIndex)
             {
-                if (controller.IsDefencing() && controller.GetFaceTo() == -behavior.RB.linearVelocity.normalized)
+                if (controller.GetData().IsDefencing() && controller.GetData().faceto == -behavior.RB.linearVelocity.normalized)
                 {
                     behavior.Reback(controller);
                 }
@@ -59,7 +59,7 @@ public class BubbleRebackDetector : MonoBehaviour
             }
             else if(!controller.GetData().IsDied() && controller.GetData().index == behavior.ItemInfo.PlayerIndex)
             {
-                if (controller.IsDefencing() && controller.GetFaceTo() == -behavior.RB.linearVelocity.normalized)
+                if (controller.GetData().IsDefencing() && controller.GetData().faceto == -behavior.RB.linearVelocity.normalized)
                 {
                     behavior.Reback(controller);
                 }

@@ -22,7 +22,7 @@ namespace Utility
 				OnUpdate?.Invoke(_totalTime);
 			}
 		}
-		public void StartComedown(float time)
+		public void StartCountdown(float time)
 		{
 			_totalTime = time;
 			Start();

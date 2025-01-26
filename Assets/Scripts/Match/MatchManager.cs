@@ -1,20 +1,26 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
+using Utility;
 
 namespace GamePlay
 {
-	public class MatchManager : IMatchManager, IMatchHelper
+	public partial class MatchManager : IMatchManager, IMatchHelper
 	{
 		//TODO: 最低開賽人數，2個?
+		//TODO: 人數上限
 		private readonly int MinPlayerCount = 2;
 		private Dictionary<int, MatchTicket<PlayerData>> _playerDict = new Dictionary<int, MatchTicket<PlayerData>>();
 		private MatchErrorHandler _errorHandler = new MatchErrorHandler();
 		private IStateManager _stateManager;
+		//private List<IObserver<PlayerInfo>> _infoObservers;
 
 		public MatchManager(IStateManager stateManager)
 		{
 			_stateManager = stateManager;
+			_stateManager.GetState<MatchState>().OnEnterState += Init;
 		}
+
 		public int GeneratePlayerID()
 		{
 			return _playerDict.Count;
@@ -33,24 +39,25 @@ namespace GamePlay
 			{
 				//成功時再刷新資料
 				playerData.index = playerID;
+				NotifyJoin(playerID);
 				return;
 			}
 			_errorHandler.Handle(MatchResult.JoinFail);
 
 		}
 
-		public void Ready(PlayerData playerData)
+		public void Ready(int index)
 		{
-			var playerID = playerData.index;
+			var playerID = index;
 			if (!_playerDict.TryGetValue(playerID, out var ticket))
 			{
 				_errorHandler.Handle(MatchResult.NotJoin);
 				return;
 			}
-			switch (ticket.MatchStatus)
+			switch (ticket.PlayerData.matchStatus)
 			{
 				case MatchStatus.NotReady:
-					ticket.MatchStatus = MatchStatus.Ready;
+					ticket.PlayerData.matchStatus = MatchStatus.Ready;
 					break;
 				case MatchStatus.Ready:
 					_errorHandler.Handle(MatchResult.AlreadyReady);
@@ -73,7 +80,7 @@ namespace GamePlay
 				_errorHandler.Handle(MatchResult.PlayerNotEnough);
 				return;
 			}
-			var isNotReady = _playerDict.Values.Any(data => data.MatchStatus != MatchStatus.Ready);
+			var isNotReady = _playerDict.Values.Any(data => data.PlayerData.matchStatus != MatchStatus.Ready);
 
 			if (isNotReady)
 			{
@@ -81,8 +88,19 @@ namespace GamePlay
 				return;
 			}
 
+            foreach (var player in _playerDict.Values)
+            {
+				player.PlayerData.matchStatus = MatchStatus.Battle;
+			}
+
 			_stateManager.ChangeState<BattleState>();
 			//TODO: 進入遊戲
+		}
+		private void Init()
+		{
+			_playerDict.Clear();
+			_joinObservers.Clear();
+			Debug.Log("Init MathManager");
 		}
 	}
 }

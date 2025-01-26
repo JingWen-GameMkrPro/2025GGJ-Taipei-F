@@ -2,16 +2,19 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using System.Collections;
+using System.Text.RegularExpressions;
+using GamePlay;
+using Utility;
 
 public class PlayerController : MonoBehaviour {
+    [SerializeField]
     PlayerData data;
-
-    //TEMP
-    static int indexCount = 0;
-
 
     [Header("Input")]
     PlayerInput playerInput;
+
+    [Header("Behavior")]
+    IPlayerBehavior playerBehavior;
 
     [Header("Character")]
     [SerializeField] CharacterController controller;
@@ -22,25 +25,8 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] List<Transform> firePoints;
 
     [Header("Hint")]
-    [SerializeField] GameObject defenceHint;
-    [SerializeField] GameObject dieHint;
-
-    #region Self
-    [SerializeField]
-    Vector2 move = Vector2.zero;
-
-    [SerializeField]
-    Vector2 faceto = Vector2.left;
-
-    [SerializeField]
-    int faceType = 3; //0 up 1 down 2 right 3 left
-
-    [SerializeField]
-    long lastDefenceTick = 0;
-
-    [SerializeField]
-    bool isInitlized = false;
-    #endregion 
+    public GameObject defenceHint;
+    public GameObject dieHint; 
 
     private void OnEnable() {
         Setup();
@@ -49,20 +35,18 @@ public class PlayerController : MonoBehaviour {
     void Setup() {
         playerInput = GetComponent<PlayerInput>();
 
-        Debug.Log(playerInput.devices[0].GetType());
-        if (playerInput.devices[0].GetType().ToString().Equals("")) {
-            Destroy(gameObject);
-            return;
+        data = new PlayerData(playerInput.devices[0], -1, this);
+
+        //Regis
+        if(SystemService.TryGetService<IMatchManager>(out IMatchManager matchManager) == false){
+
         }
-
-        data = new PlayerData(playerInput.devices[0], indexCount++, this);
-
+        matchManager.Join(data);
+        
         //spriteRenderer.material = playerMat[data.index];
         for (int i = 0; i < characterList.Count; i++) {
             characterList[i].SetActive(i == data.index);
         }
-
-        //Regis
 
         DontDestroyOnLoad(gameObject);
         StartCoroutine(Finish());
@@ -70,108 +54,54 @@ public class PlayerController : MonoBehaviour {
 
     IEnumerator Finish() {
         yield return new WaitForSecondsRealtime(0.5f);
-        isInitlized = true;
+        data.isInitlized = true;
     }
 
-    private void Update() {     
+    private void Update() {
         HandleHint();
-    }
-
-    private void FixedUpdate() {
         HandleMove();
     }
 
     void HandleMove() {
-        if (data.canMove == false) {
-            return;
-        }
-        Vector2 finalMov = new Vector2(move.x, move.y);
-        float x = finalMov.x;
-        float y = finalMov.y;
-
-        //斜方處理
-        if (x + y > 1 || x + y < -1 ||
-            (x > 0.1f && y < -0.1f) ||
-            (x < -0.1f && y > 0.1f)) {
-
-            x = x * Mathf.Sqrt(0.5f);
-            y = y * Mathf.Sqrt(0.5f); 
-        }
-
-        finalMov.x = x;
-        finalMov.y = y;
-
-        if (controller != null) {
-            controller.Move(finalMov);
-        }
-
-        //face where
-        //優先上下
-        //再左右
-        bool horizonMove = Mathf.Abs(x) >= Mathf.Abs(y);
-        if (horizonMove) {
-            if (x >= 0.001f) {
-                faceto = Vector2.right;
-                faceType = 2;
-            } else if (x <= -0.001f) {
-                faceto = Vector2.left;
-                faceType = 3;
-            }
-        } else {
-            if (y >= 0.001f) {
-                faceto = Vector2.up;
-                faceType = 0;
-            } else if (y <= -0.001f) {
-                faceto = Vector2.down;
-                faceType = 1;
-            }
-        }
-
-        aniControl.UpdateState(finalMov, faceType);
+        playerBehavior = new PlayerGameBehavior();
+        playerBehavior.HandleMove(this);
     }
 
     void HandleAttack() {
-        ItemManager.ItemInfo info = new ItemManager.ItemInfo();
-        info.PlayerIndex = data.index;
-        info.Owner = gameObject;
-        info.Position = firePoints[faceType].position;
-        info.Direction = faceto;
-        info.Speed = 10;
-        ItemManager.Instance.UseItem(info);
+        playerBehavior = new PlayerGameBehavior();
+        playerBehavior.HandleAttack(this);
     }
 
     void HandleDamage(int v) {
-        data.ModifyHP(v);
+        playerBehavior = new PlayerGameBehavior();
+        playerBehavior.HandleDamage(this, v);
     }
 
     void HandleSpeedModify(int v) {
-        data.ModifySpeed(v);
+        playerBehavior = new PlayerGameBehavior();
+        playerBehavior.HandleSpeedModify(this, v);
     }
 
     void HandleHint() {
-        if (defenceHint != null) {
-            defenceHint.SetActive(IsDefencing());
-        }
-        if (dieHint != null) {
-            dieHint.SetActive(data.IsDied());
-        }
+        playerBehavior = new PlayerGameBehavior();
+        playerBehavior.HandleHint(this);
     }
 
     #region Input
 
     public void DoMove(InputAction.CallbackContext ctx) {
-        if (data.IsDied() || !data.canMove || !isInitlized) {
+        if (data.IsDied() || !data.canMove || !data.isInitlized) {
+            data.UpdateMove(Vector2.zero);
             return;
         }
-        move = ctx.ReadValue<Vector2>();
-        move = move * Time.deltaTime * data.speed;
+        data.UpdateMove(ctx.ReadValue<Vector2>());
     }
 
     public void DoAttack(InputAction.CallbackContext ctx) {
         if (ctx.performed == false) {
             return;
         }
-        if (data.IsDied() || !isInitlized) {
+        if (data.IsDied() || !data.isInitlized) {
             return;
         }
         Debug.Log("DoAttack");
@@ -182,12 +112,12 @@ public class PlayerController : MonoBehaviour {
         if (ctx.performed == false) {
             return;
         }
-        if (data.IsDied() || !isInitlized) {
+        if (data.IsDied() || !data.isInitlized) {
             return;
         }
         Debug.Log("DoDefence");
 
-        lastDefenceTick = System.DateTime.Now.Ticks;
+        data.UpdateDefenceTick();
     }
 
     #endregion
@@ -209,52 +139,39 @@ public class PlayerController : MonoBehaviour {
         return data;
     }
 
-    public bool IsDefencing() {
-        if (data.IsDied() || !isInitlized) {
-            return false;
-        }
-        // 1 tick = 0.0000001 sec
-        // 1000000 ticks = 0.1 sec
-        long safeDefenceTime = 10000000;
-        return System.DateTime.Now.Ticks - lastDefenceTick < safeDefenceTime;
+    public CharacterController GetCharacterController(){
+        return controller;
+    }
+    public PlayerAnimation GetPlayerAnimation(){
+        return aniControl;
     }
 
-    public Vector2 GetFaceTo() {
-        int t = 0;
-        return faceto;
+    public List<Transform> GetFirePointList(){
+        return firePoints;
     }
 
     public void TriggerHit(List<ItemManager.InteractType> typeList) {
-        if (data.IsDied() || !isInitlized) {
-            return;
-        }
-        foreach (ItemManager.InteractType type in typeList) {
-            switch (type) {
-                case ItemManager.InteractType.Damage:
-                    HandleDamage(-10);
-                    break;
-                case ItemManager.InteractType.Boom:
-                    HandleDamage(-20);
-                    break;
-                case ItemManager.InteractType.SpeedDown:
-                    HandleSpeedModify(-15);
-                    break;
-                case ItemManager.InteractType.SpeedUp:
-                    HandleSpeedModify(15);
-                    break;
-            }
-        }
+        playerBehavior = new PlayerGameBehavior();
+        playerBehavior.TriggerHit(this, typeList);
     }
 
     #endregion
 }
 
+[SerializeField]
 public class PlayerData{
     public int index;
+    public MatchStatus matchStatus;
     public InputDevice device;
     public int hp;
     public int speed;
     public bool canMove;
+
+    public Vector2 move = Vector2.zero;
+    public Vector2 faceto = Vector2.left;
+    public int faceType = 3; //0 up 1 down 2 right 3 left
+    public long lastDefenceTick = 0;
+    public bool isInitlized = false;
 
     //GameObject
     public PlayerController playerController;
@@ -263,7 +180,7 @@ public class PlayerData{
         this.device = device;
         this.index = index;
         this.hp = 100;
-        this.speed = 40;
+        this.speed = 50;
         this.canMove = true;
         this.playerController = playerController;
     }
@@ -272,6 +189,8 @@ public class PlayerData{
         hp += v;
         if (hp <= 0) {
             hp = 0;
+
+            move = Vector2.zero;
         }
     }
     public void ModifySpeed(int v) {
@@ -281,7 +200,73 @@ public class PlayerData{
         }
     }
 
+    public void UpdateDefenceTick() {
+        lastDefenceTick = System.DateTime.Now.Ticks;
+    }
+
+    public void UpdateMove(Vector2 v) {
+        move = v * Time.fixedDeltaTime * speed * 0.05f;
+
+        float x = move.x;
+        float y = move.y;
+
+        //斜方處理
+        if (x + y > 1 || x + y < -1 ||
+            (x > 0.1f && y < -0.1f) ||
+            (x < -0.1f && y > 0.1f)) {
+
+            x = x * Mathf.Sqrt(0.5f);
+            y = y * Mathf.Sqrt(0.5f);
+        }
+
+        move.x = x;
+        move.y = y;
+
+        UpdateFace();
+    }
+
+    public void UpdateFace() {
+        //face where
+        //優先上下
+        //再左右
+        float x = move.x;
+        float y = move.y;
+        bool horizonMove = Mathf.Abs(move.x) >= Mathf.Abs(y);
+        if (horizonMove) {
+            if (x >= 0.001f) {
+                faceto = Vector2.right;
+                faceType = 2;
+            } else if (x <= -0.001f) {
+                faceto = Vector2.left;
+                faceType = 3;
+            }
+        } else {
+            if (y >= 0.001f) {
+                faceto = Vector2.up;
+                faceType = 0;
+            } else if (y <= -0.001f) {
+                faceto = Vector2.down;
+                faceType = 1;
+            }
+        }
+    }
+
     public bool IsDied() {
         return hp <= 0;
+    }
+
+    public bool IsDefencing() {
+        if (IsDied() || !isInitlized) {
+            return false;
+        }
+        // 1 tick = 0.0000001 sec
+        // 1000000 ticks = 0.1 sec
+        long safeDefenceTime = 10000000;
+        return System.DateTime.Now.Ticks - lastDefenceTick < safeDefenceTime;
+    }
+
+    void Respawn() {
+        hp = 100;
+        canMove = true;
     }
 }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 486718458003346708}
   - component: {fileID: 4648006011634955301}
+  - component: {fileID: 8138778311393061256}
   m_Layer: 0
   m_Name: wood_box_0
   m_TagString: Untagged
@@ -89,6 +90,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &8138778311393061256
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6703888598687148435}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.62, y: 1.5873916, z: 0.2}
+  m_Center: {x: 0, y: -0.06380427, z: 0}
 --- !u!1001 &1944097105426919684
 PrefabInstance:
   m_ObjectHideFlags: 0

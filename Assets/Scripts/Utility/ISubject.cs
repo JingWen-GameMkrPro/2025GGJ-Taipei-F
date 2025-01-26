@@ -13,9 +13,5 @@ namespace Utility
 		/// 解訂閱
 		/// </summary>
 		void Deregister(IObserver<T> observer);
-		/// <summary>
-		/// 呼叫觀察者的更新
-		/// </summary>
-		void Notify(T notify);
 	}
 }

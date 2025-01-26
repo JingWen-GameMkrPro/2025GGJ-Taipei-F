@@ -30,7 +30,7 @@ public class PlayerAnimation : MonoBehaviour
                 faceup = armType == 0;
             }
 
-            isLeft = move.x < 0;
+            isLeft = move.x <= 0;
         }
     }
 
