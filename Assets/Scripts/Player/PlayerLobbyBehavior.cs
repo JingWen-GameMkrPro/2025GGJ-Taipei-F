@@ -10,7 +10,7 @@ public class PlayerLobbyBehavior : IPlayerBehavior
             _pController.GetCharacterController().Move(_pController.GetData().move);
         }
 
-        _pController.GetPlayerAnimation().UpdateState(_pController.GetData().move, _pController.GetData().faceType);
+        _pController.GetPlayerAnimation().UpdateState(_pController.GetData().move, _pController.GetData().faceType, _pController.GetData().IsDied());
     }
 
     public void HandleAttack(PlayerController _pController) {

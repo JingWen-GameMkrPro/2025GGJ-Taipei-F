@@ -8,6 +8,7 @@ public class PlayerAnimation : MonoBehaviour
     [Header("State")]
     [SerializeField] float speed = 0;
     [SerializeField] bool faceup = false;
+    [SerializeField] bool isDied = false;
 
     [Header("body")]
     [SerializeField] List<GameObject> bodyList;
@@ -23,8 +24,9 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] [Min(0)] private float hurtTime;
     [SerializeField] private Color hurtColor;
 
-    public void UpdateState(Vector2 move, int armType) {
+    public void UpdateState(Vector2 move, int armType, bool isDied) {
         speed = move.magnitude;
+        this.isDied = isDied;
         this.armType = armType;
         if (speed <= 0) {
             speed = -1;
@@ -44,19 +46,12 @@ public class PlayerAnimation : MonoBehaviour
         HandldBody();
     }
 
-    public void TriggerDie(){
-        foreach (GameObject obj in bodyList) {
-            if (obj.activeSelf == true && obj.activeInHierarchy == true && obj.GetComponent<Animator>() != null) {
-                obj.GetComponent<Animator>().SetTrigger("die");
-            }
-        }
-    }
-
     void HandleAnimation() {
         foreach (GameObject obj in bodyList) {
             if (obj.activeSelf == true && obj.activeInHierarchy == true && obj.GetComponent<Animator>() != null) {
                 obj.GetComponent<Animator>().SetBool("face", faceup);
                 obj.GetComponent<Animator>().SetFloat("speed", speed);
+                obj.GetComponent<Animator>().SetBool("die", isDied);
             }
         }
     }
