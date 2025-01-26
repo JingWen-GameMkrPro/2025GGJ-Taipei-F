@@ -18,7 +18,6 @@ namespace GamePlay
 		private Timer _battleCountdown;
 		private Timer _bullectSpawnCountdown;
 		private Dictionary<int, PlayerData> _playerDict;
-		private Dictionary<int, PlayerInfo> _playerBattleInfos = new Dictionary<int, PlayerInfo>();
 		private Dictionary<int, int> _killCount = new Dictionary<int, int>();
 		//private Dictionary<int, Timer> _playerRespawnTimers = new Dictionary<int, Timer>();
 		private List<Timer> _playerRespawnTimers = new List<Timer>();
@@ -65,31 +64,18 @@ namespace GamePlay
         private void OnEnterBattle()
 		{
 			_bullectSpawnCountdown.StartCountdown(3);
-			//StartBattle();
 		}
 
 
 		public void StartBattle(Dictionary<int, PlayerData> playerTable)
 		{
 			_playerDict = playerTable;
-			_playerBattleInfos.Clear();
-			_playerRespawnTimers.Clear();
+			//_playerRespawnTimers.Clear();
 
 			foreach (var playerKeyValue in playerTable)
 			{
-				var playerID = playerKeyValue.Key;
 				var playerData = playerKeyValue.Value;
 				playerData.matchStatus = MatchStatus.Battle;
-
-				_playerBattleInfos[playerID] = new PlayerInfo()
-				{
-					//TODO: magic number
-					currentHealth = playerData.hp,
-					ammo = 0,
-					kill = 0
-				};
-				//這裡會有問題，需要解註冊
-				//_playerRespawnTimers[playerID].OnUpdate += (daltaTime) => { PlayerRespawnCountdown(playerID, daltaTime); };
 			}
 			
 			_battleCountdown.StartCountdown(99);

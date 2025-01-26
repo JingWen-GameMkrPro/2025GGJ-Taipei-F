@@ -1,10 +1,6 @@
 using GamePlay;
-using NUnit.Framework;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 using Utility;
 
 public class ItemManager : MonoBehaviour

@@ -1,8 +1,4 @@
 using System.Collections.Generic;
-using System.Drawing;
-using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEditor.Rendering;
 using UnityEngine;
 using static ItemManager;
 
