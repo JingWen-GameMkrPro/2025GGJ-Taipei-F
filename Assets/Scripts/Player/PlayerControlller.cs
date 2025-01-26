@@ -9,6 +9,7 @@ using System;
 public class PlayerController : MonoBehaviour {
     [SerializeField]
     PlayerData data;
+    bool lockUpdateMove = false;
 
     [Header("Input")]
     PlayerInput playerInput;
@@ -68,7 +69,9 @@ public class PlayerController : MonoBehaviour {
 
     private void Update() {
         HandleHint();
-        HandleMove();
+        if(lockUpdateMove == false){
+            HandleMove();
+        }
     }
 
     void UpdateBehavior(){
@@ -167,12 +170,14 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void UpdatePosition(Vector3 pos){
+        lockUpdateMove = true;
         StartCoroutine(DelayUpdatePos(pos));
     }
 
     IEnumerator DelayUpdatePos(Vector3 pos){
         yield return 0;
         transform.position = pos;
+        lockUpdateMove = false;
     }
     #endregion
 }
@@ -293,5 +298,7 @@ public class PlayerData{
         hp = 100;
         speed = 50;
         canMove = true;
+
+        //ItemManager.Instance.ResetPlayer(index);
     }
 }
