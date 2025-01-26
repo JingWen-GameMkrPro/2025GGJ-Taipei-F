@@ -6,6 +6,7 @@ namespace GamePlay
 	{
 		void StartBattle();
 		void PickUpItem(int playerIndex, ItemManager.ItemType type);
-		void UseItem(ItemManager.ItemInfo itemInfo);
+		void UseItem(int playerIndex, ItemManager.ItemInfo itemInfo);
+		void DoDamage(int attackerIndex, int playerIndex, int damage);
 	}
 }

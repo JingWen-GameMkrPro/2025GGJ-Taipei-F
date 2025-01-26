@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using GamePlay;
 using Utility;
 
@@ -18,7 +19,14 @@ public class PlayerLobbyBehavior : IPlayerBehavior
             if(SystemService.TryGetService<IMatchManager>(out IMatchManager matchManager) == false){
                 return;
             }
+            UnityEngine.Debug.Log("Ready! " + _pController.GetData().index);
             matchManager.Ready(_pController.GetData().index);
+        }else if(_pController.GetData().index == 0 && _pController.GetData().matchStatus == GamePlay.MatchStatus.Ready){
+            if(SystemService.TryGetService<IMatchManager>(out IMatchManager matchManager) == false){
+                return;
+            }
+            UnityEngine.Debug.Log("Start!");
+            matchManager.Start();
         }
     }
 

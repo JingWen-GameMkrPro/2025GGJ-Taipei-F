@@ -1,8 +1,11 @@
 player_3.png
-size:816,454
+size:1389,537
 filter:Linear,Linear
 pma:true
 player_3_back
-bounds:424,2,390,450
+bounds:997,85,390,450
 player_3_body
-bounds:2,2,420,450
+bounds:575,85,420,450
+player_3_die
+bounds:2,2,533,571
+rotate:90
