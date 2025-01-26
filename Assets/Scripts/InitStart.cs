@@ -27,5 +27,13 @@ namespace GamePlay
 			SystemService.TryGetService<IStateManager>(out var stateManager);
 			stateManager.ChangeState<MatchState>();
 		}
+
+		void Update()
+		{
+			if (Input.anyKeyDown) 
+			{
+				StartGame();
+			}
+		}
 	}
 }
