@@ -19,6 +19,18 @@ public class ItemBehavior: MonoBehaviour
 
     public GameObject BoomEffect;
 
+    public float LifeTime = 3f;
+    float currentLifeTime = 0f;
+
+    private void Update()
+    {
+        currentLifeTime += Time.deltaTime;
+        if(currentLifeTime >= LifeTime)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
     public void SetAnimatorIndex(int index)
     {
         Animator.SetInteger("Index", index);
