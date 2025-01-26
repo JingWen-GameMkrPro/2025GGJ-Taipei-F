@@ -14,22 +14,24 @@ namespace GamePlay
 		{
 			_joinObservers.Remove(observer);
 		}
-		private void NotifyJoin(int playerID)
+		private void NotifyJoin()
 		{
-			var ticket = _playerDict[playerID];
-			var index = ticket.index;
-			if (index >= 0 && index < _joinObservers.Count)
-			{
-				var observer = _joinObservers[index];
-				var joinInfo = GetPlayerJoinInfo(ticket);
-				observer.Update(joinInfo);
+            foreach (var playerData in _playerDict.Values)
+            {
+				foreach (var observer in _joinObservers)
+				{
+					var joinInfo = GetPlayerJoinInfo(playerData);
+					observer.Update(joinInfo);
+				}
 			}
 		}
 		private PlayerJoinInfo GetPlayerJoinInfo(PlayerData ticket)
 		{
 			var joinInfo = new PlayerJoinInfo();
+			joinInfo.index = ticket.index;
 			//TODO: don't use magic number
 			joinInfo.maxHealth = 100;
+			joinInfo.isReady = ticket.matchStatus == MatchStatus.Ready;
 			return joinInfo;
 		}
 	}

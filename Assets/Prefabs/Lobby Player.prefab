@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5961341411326522926
 RectTransform:
   m_ObjectHideFlags: 0
@@ -245,6 +245,7 @@ MonoBehaviour:
   ammoNumText: {fileID: 0}
   joinedUI: {fileID: 1503818722460568354}
   notJoinedUI: {fileID: 5041520580207883189}
+  readyUI: {fileID: 1103925331028198351}
 --- !u!1 &4852237011643337097
 GameObject:
   m_ObjectHideFlags: 0

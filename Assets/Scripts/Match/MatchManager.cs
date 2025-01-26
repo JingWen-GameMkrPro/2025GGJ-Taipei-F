@@ -41,7 +41,7 @@ namespace GamePlay
 				playerData.index = playerID;
 				//TODO: 要做配對狀態的檢查
 				playerData.matchStatus = MatchStatus.NotReady;
-				NotifyJoin(playerID);
+				NotifyJoin();
 				return;
 			}
 			_errorHandler.Handle(MatchResult.JoinFail);
@@ -68,6 +68,7 @@ namespace GamePlay
 					_errorHandler.Handle(MatchResult.ReadyFail);
 					break;
 			}
+			NotifyJoin();
 		}
 
 		public void Start()
@@ -103,7 +104,8 @@ namespace GamePlay
 				playerData.Respawn();
 			}
 			_joinObservers.Clear();
-			Debug.Log("Init MathManager");
+			Debug.Log("Init MacthManager");
+			NotifyJoin();
 		}
 	}
 }

@@ -13,6 +13,8 @@ public struct PlayerInfo
 
 public struct PlayerJoinInfo
 {
+	public int index;
+	public bool isReady;
 	public int maxHealth;
 }
 
@@ -24,21 +26,44 @@ public class PlayerPanel : MonoBehaviour, IObserver<PlayerInfo>, IObserver<Playe
 	[SerializeField] private Text ammoNumText;
 	[SerializeField] GameObject joinedUI;
 	[SerializeField] GameObject notJoinedUI;
+	[SerializeField] GameObject readyUI;
 	private bool _isJoined = false;
 	private int maxHealth = 0;
-	
+	private StateBase _state;
 	private void Start()
 	{
-		SystemService.TryGetService<IMatchManager>(out var matchManager);
-		SystemService.TryGetService<IBattleManager>(out var battleManager);
-		battleManager.Register(this);
+
+		SystemService.TryGetService<IStateManager>(out var stateManager);
+		_state = stateManager.CurrentState;
+
+		if (_state == stateManager.GetState<MatchState>())
+		{
+			SystemService.TryGetService<IMatchManager>(out var matchManager);
+			matchManager.Register(this);
+		}
+		else if (_state == stateManager.GetState<BattleState>())
+		{
+			SystemService.TryGetService<IBattleManager>(out var battleManager);
+			battleManager.Register(this);
+		}
 	}
 
 	private void OnDestroy()
 	{
-		SystemService.TryGetService<IMatchManager>(out var matchManager);
-		SystemService.TryGetService<IBattleManager>(out var battleManager);
-		battleManager.Deregister(this);
+		SystemService.TryGetService<IStateManager>(out var stateManager);
+
+		if (_state == stateManager.GetState<MatchState>())
+		{
+			SystemService.TryGetService<IMatchManager>(out var matchManager);
+			matchManager.Deregister(this);
+		}
+		else if (_state == stateManager.GetState<BattleState>())
+		{
+			SystemService.TryGetService<IBattleManager>(out var battleManager);
+			battleManager.Deregister(this);
+		}
+
+		_state = null;
 	}
 
 	void IObserver<PlayerInfo>.Update(PlayerInfo data)
@@ -56,9 +81,13 @@ public class PlayerPanel : MonoBehaviour, IObserver<PlayerInfo>, IObserver<Playe
 
 	void IObserver<PlayerJoinInfo>.Update(PlayerJoinInfo data)
 	{
-		maxHealth = data.maxHealth;
-		notJoinedUI.SetActive(false);
-		joinedUI.SetActive(true);
-		_isJoined = true;
+		if (data.index == playerIndex)
+		{
+			maxHealth = data.maxHealth;
+			notJoinedUI.SetActive(false);
+			joinedUI.SetActive(true);
+			readyUI.SetActive(data.isReady);
+			_isJoined = true;
+		}
 	}
 }
