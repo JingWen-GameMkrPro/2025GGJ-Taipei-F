@@ -24,6 +24,11 @@ public class PlayerPanel : MonoBehaviour, IObserver<PlayerInfo>, IObserver<Playe
     [SerializeField] GameObject notJoinedUI;
     private bool _isJoined = false;
     private int maxHealth = 0;
+    
+    private void Start()
+    {
+        SystemService.AddService(this);
+    }
 
     void IObserver<PlayerInfo>.Update(PlayerInfo data)
     {
