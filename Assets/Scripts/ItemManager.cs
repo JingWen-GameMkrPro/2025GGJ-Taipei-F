@@ -53,7 +53,7 @@ public class ItemManager : MonoBehaviour
     public GameObject BubbleIconPrefab;
     public GameObject BubblePrefab;
 
-    //¨t²Î¥Í¦¨Icon¡A¥i¥H«ü©wType
+    //ï¿½tï¿½Î¥Í¦ï¿½Iconï¿½Aï¿½iï¿½Hï¿½ï¿½ï¿½wType
     public GameObject CreateItemIconInMap(ItemType type)
     {
         SoundManager.Instance.PlaySoundEffect(SoundEffectType.Spawn);
@@ -66,10 +66,13 @@ public class ItemManager : MonoBehaviour
         }
     }
 
-    //¹D¨ã¥»¨­³qª¾¹D¨ãºÞ²zªÌª±®a¾ß¬B¹D¨ã
+    //ï¿½Dï¿½ã¥»ï¿½ï¿½ï¿½qï¿½ï¿½ï¿½Dï¿½ï¿½Þ²zï¿½Ìªï¿½ï¿½aï¿½ß¬Bï¿½Dï¿½ï¿½
     public void PickUpItem(int playerIndex , ItemType type)
     {
         PlayerItems[playerIndex].Enqueue(type);
+        if(SoundManager.Instance != null){
+            SoundManager.Instance.PlaySoundEffect(SoundEffectType.Pickup);
+        }
         if (SystemService.TryGetService<IBattleManager>(out IBattleManager battleManager) == false)
         {
             return;
@@ -80,7 +83,7 @@ public class ItemManager : MonoBehaviour
     }
 
 
-    //ª±®a¥»¨­¥D°Ê¨Ï¥Î¹D¨ã¡A¥ý¶i¥ý¥X
+    //ï¿½ï¿½ï¿½aï¿½ï¿½ï¿½ï¿½ï¿½Dï¿½Ê¨Ï¥Î¹Dï¿½ï¿½Aï¿½ï¿½ï¿½iï¿½ï¿½ï¿½X
     public void UseItem(ItemInfo itemInfo)
     {
         if (PlayerItems[itemInfo.PlayerIndex].Count > 0)
@@ -91,6 +94,9 @@ public class ItemManager : MonoBehaviour
                 case ItemType.Bubble:
                     var instance = Instantiate(BubblePrefab);
                     instance.GetComponent<ItemBehavior>().Invoke(itemInfo);
+                    if(SoundManager.Instance != null){
+                        SoundManager.Instance.PlaySoundEffect(SoundEffectType.Shoot);
+                    }
                     return;
                 default:
                     return;

@@ -114,6 +114,8 @@ public class PlayerAnimation : MonoBehaviour
     }
 
     public void step(){
-        Debug.Log("step!");
+        if(SoundManager.Instance != null){
+            SoundManager.Instance.PlaySoundEffect(SoundEffectType.Walk);
+        }
     }
 }

@@ -34,7 +34,7 @@ public class ItemBehavior: MonoBehaviour
         Animator.SetInteger("Index", index);
     }
 
-    //¸I¨ì¦y¨ë·|Ãz¬µ
+    //ï¿½Iï¿½ï¿½yï¿½ï¿½|ï¿½zï¿½ï¿½
     List<GameObject> boomRangePlayers = new();
     public void Boom()
     {
@@ -58,7 +58,7 @@ public class ItemBehavior: MonoBehaviour
 
     public void Bounce()
     {
-        //¤Ï¼u
+        //ï¿½Ï¼u
         RB.linearVelocity = -RB.linearVelocity; 
     }
     public void Block()
@@ -68,6 +68,9 @@ public class ItemBehavior: MonoBehaviour
 
     public void Reback(PlayerController target)
     {
+        if(SoundManager.Instance != null){
+            SoundManager.Instance.PlaySoundEffect(SoundEffectType.Block);
+        }
         ItemInfo.PlayerIndex = target.GetData().index;
         ChangeColor(ItemInfo.PlayerIndex);
 
@@ -90,7 +93,7 @@ public class ItemBehavior: MonoBehaviour
         
         var collisionTag = collision.gameObject.tag;
 
-        //¡I¡I½T»{ª±®a±MÄÝTag
+        //ï¿½Iï¿½Iï¿½Tï¿½{ï¿½ï¿½ï¿½aï¿½Mï¿½ï¿½Tag
         if (collisionTag == "Player")
         {
             boomRangePlayers.Add(collision.gameObject);
@@ -101,7 +104,7 @@ public class ItemBehavior: MonoBehaviour
     {
         var collisionTag = collision.gameObject.tag;
 
-        //¡I¡I½T»{ª±®a±MÄÝTag
+        //ï¿½Iï¿½Iï¿½Tï¿½{ï¿½ï¿½ï¿½aï¿½Mï¿½ï¿½Tag
         if (collisionTag == "Player")
         {
             boomRangePlayers.Remove(collision.gameObject);

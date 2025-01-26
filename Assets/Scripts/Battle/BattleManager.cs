@@ -109,6 +109,7 @@ namespace GamePlay
 			playerData.ModifyHP(damage);
 			if (playerData.IsDied())
 			{
+				playerData.playerController.DoDie();
 				_killCount.TryGetValue(attackerIndex, out var killCount);
 				killCount++;
 				_killCount[attackerIndex] = killCount;

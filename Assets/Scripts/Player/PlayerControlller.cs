@@ -134,6 +134,12 @@ public class PlayerController : MonoBehaviour {
         data.UpdateDefenceTick();
     }
 
+    public void DoDie(){
+        if(SoundManager.Instance != null){
+            SoundManager.Instance.PlaySoundEffect(SoundEffectType.Death);
+        }
+    }
+
     #endregion
 
     //void TrggerVibrate(float low, float high) {
@@ -220,6 +226,17 @@ public class PlayerData{
             hp = 0;
 
             move = Vector2.zero;
+        }else{
+            if(v < 0){
+                if(SoundManager.Instance != null){
+                    SoundEffectType type = SoundEffectType.Damage1;
+                    int r = UnityEngine.Random.Range(0,1);
+                    if(r == 1){
+                        type = SoundEffectType.Damage2;
+                    }
+                    SoundManager.Instance.PlaySoundEffect(type);
+                }
+            }
         }
     }
     public void ModifySpeed(int v) {

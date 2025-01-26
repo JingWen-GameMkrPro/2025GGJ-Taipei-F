@@ -9,7 +9,11 @@ public enum SoundEffectType
     Explosion,
     Stick,
     Spawn,
-    Death
+    Death,
+    Damage1,
+    Damage2,
+    Join,
+    Ready
 }
 
 [RequireComponent(typeof(AudioSource))]

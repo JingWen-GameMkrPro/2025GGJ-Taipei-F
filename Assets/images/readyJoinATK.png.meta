@@ -1,0 +1,585 @@
+fileFormatVersion: 2
+guid: c142ab9b774ef4f7f8064c82ac100758
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8692509551127621115
+    second: readyJoinATK_0
+  - first:
+      213: -42989263495495692
+    second: readyJoinATK_1
+  - first:
+      213: 7209902151145225677
+    second: readyJoinATK_2
+  - first:
+      213: -2719385466218097179
+    second: readyJoinATK_3
+  - first:
+      213: -2864448991713121554
+    second: readyJoinATK_4
+  - first:
+      213: 9092827240201932934
+    second: readyJoinATK_5
+  - first:
+      213: -4064944614841008136
+    second: readyJoinATK_6
+  - first:
+      213: -7613626161080736371
+    second: readyJoinATK_7
+  - first:
+      213: 2841306143089374727
+    second: readyJoinATK_8
+  - first:
+      213: -9014904718092285884
+    second: readyJoinATK_9
+  - first:
+      213: -1434541202075804956
+    second: readyJoinATK_10
+  - first:
+      213: 2054775707557994067
+    second: readyJoinATK_11
+  - first:
+      213: 6092180611872903784
+    second: readyJoinATK_12
+  - first:
+      213: 4949507475489882804
+    second: readyJoinATK_13
+  - first:
+      213: -8592586880375761454
+    second: readyJoinATK_14
+  - first:
+      213: -9112786707872400864
+    second: readyJoinATK_15
+  - first:
+      213: -5664929088074396565
+    second: readyJoinATK_16
+  - first:
+      213: -7915576447841266152
+    second: readyJoinATK_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: readyJoinATK_0
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 75
+        width: 69
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 502195e3e900e5780800000000000000
+      internalID: -8692509551127621115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: readyJoinATK_1
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 140
+        width: 23
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fff13c1e75476ff0800000000000000
+      internalID: -42989263495495692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: readyJoinATK_2
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 72
+        width: 79
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcdf5588ec7be0460800000000000000
+      internalID: 7209902151145225677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: readyJoinATK_3
+      rect:
+        serializedVersion: 2
+        x: 598
+        y: 72
+        width: 61
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e5d5be835dc24ad0800000000000000
+      internalID: -2719385466218097179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: readyJoinATK_4
+      rect:
+        serializedVersion: 2
+        x: 809
+        y: 72
+        width: 77
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eeaa6bb81de6f38d0800000000000000
+      internalID: -2864448991713121554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: readyJoinATK_5
+      rect:
+        serializedVersion: 2
+        x: 891
+        y: 73
+        width: 49
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6805b38f236303e70800000000000000
+      internalID: 9092827240201932934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: readyJoinATK_6
+      rect:
+        serializedVersion: 2
+        x: 941
+        y: 73
+        width: 49
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ffb3c8e86a6697c0800000000000000
+      internalID: -4064944614841008136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: readyJoinATK_7
+      rect:
+        serializedVersion: 2
+        x: 1125
+        y: 72
+        width: 61
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8569206857f65690800000000000000
+      internalID: -7613626161080736371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: readyJoinATK_8
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 71
+        width: 62
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7063afc12e85e6720800000000000000
+      internalID: 2841306143089374727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: readyJoinATK_9
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 74
+        width: 20
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 448cd120cef94e280800000000000000
+      internalID: -9014904718092285884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: readyJoinATK_10
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 73
+        width: 57
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ea1c92906c771ce0800000000000000
+      internalID: -1434541202075804956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: readyJoinATK_11
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 56
+        width: 24
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35e981e8e97048c10800000000000000
+      internalID: 2054775707557994067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: readyJoinATK_12
+      rect:
+        serializedVersion: 2
+        x: 465
+        y: 73
+        width: 60
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 862d43e1df5cb8450800000000000000
+      internalID: 6092180611872903784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: readyJoinATK_13
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 71
+        width: 61
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b207b943de20b440800000000000000
+      internalID: 4949507475489882804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: readyJoinATK_14
+      rect:
+        serializedVersion: 2
+        x: 667
+        y: 46
+        width: 59
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d5558df1cff0c880800000000000000
+      internalID: -8592586880375761454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: readyJoinATK_15
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 56
+        width: 24
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02a3d5355c0e88180800000000000000
+      internalID: -9112786707872400864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: readyJoinATK_16
+      rect:
+        serializedVersion: 2
+        x: 993
+        y: 71
+        width: 61
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6c4c8b22012261b0800000000000000
+      internalID: -5664929088074396565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: readyJoinATK_17
+      rect:
+        serializedVersion: 2
+        x: 1061
+        y: 74
+        width: 58
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81619f1c829362290800000000000000
+      internalID: -7915576447841266152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      readyJoinATK_0: -8692509551127621115
+      readyJoinATK_1: -42989263495495692
+      readyJoinATK_10: -1434541202075804956
+      readyJoinATK_11: 2054775707557994067
+      readyJoinATK_12: 6092180611872903784
+      readyJoinATK_13: 4949507475489882804
+      readyJoinATK_14: -8592586880375761454
+      readyJoinATK_15: -9112786707872400864
+      readyJoinATK_16: -5664929088074396565
+      readyJoinATK_17: -7915576447841266152
+      readyJoinATK_2: 7209902151145225677
+      readyJoinATK_3: -2719385466218097179
+      readyJoinATK_4: -2864448991713121554
+      readyJoinATK_5: 9092827240201932934
+      readyJoinATK_6: -4064944614841008136
+      readyJoinATK_7: -7613626161080736371
+      readyJoinATK_8: 2841306143089374727
+      readyJoinATK_9: -9014904718092285884
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

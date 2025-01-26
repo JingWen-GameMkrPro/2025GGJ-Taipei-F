@@ -42,6 +42,9 @@ namespace GamePlay
 				//TODO: 要做配對狀態的檢查
 				playerData.matchStatus = MatchStatus.NotReady;
 				NotifyJoin();
+				if(SoundManager.Instance != null){
+					SoundManager.Instance.PlaySoundEffect(SoundEffectType.Join);
+				}
 				return;
 			}
 			_errorHandler.Handle(MatchResult.JoinFail);
@@ -69,6 +72,9 @@ namespace GamePlay
 					break;
 			}
 			NotifyJoin();
+			if(SoundManager.Instance != null){
+				SoundManager.Instance.PlaySoundEffect(SoundEffectType.Ready);
+			}
 		}
 
 		public void Start()
