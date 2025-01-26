@@ -29,8 +29,6 @@ public class ItemIconBehavior : MonoBehaviour
         //！！確認玩家專屬Tag
         if (collisionTag == "Player")
         {
-            Debug.Log("AWDAW");
-            //collision.gameObject.GetComponent<PlayerController>().GetData().index
             //通知玩家，並告知自身類別
             ItemManager.Instance.PickUpItem(collision.gameObject.GetComponent<Player_HitSensor>().controller.GetData().index, itemType);
 
