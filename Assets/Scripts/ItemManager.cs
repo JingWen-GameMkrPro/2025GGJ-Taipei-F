@@ -1,8 +1,11 @@
+using GamePlay;
 using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
+using Utility;
 
 public class ItemManager : MonoBehaviour
 {
@@ -71,6 +74,13 @@ public class ItemManager : MonoBehaviour
     public void PickUpItem(int playerIndex , ItemType type)
     {
         PlayerItems[playerIndex].Enqueue(type);
+        if (SystemService.TryGetService<IBattleManager>(out IBattleManager battleManager) == false)
+        {
+            return;
+        }
+        //_pController.GetPlayerAnimation().PlayHurtAnimation();
+        battleManager.PickUpItem(playerIndex, type);
+
     }
 
 
