@@ -200,11 +200,16 @@ public class PlayerData{
     }
 
     public void ModifyHP(int v) {
+        int cacheHP = hp;
         hp += v;
         if (hp <= 0) {
             hp = 0;
 
             move = Vector2.zero;
+
+            if(cacheHP != hp){
+                playerController.GetPlayerAnimation().TriggerDie();
+            }
         }
     }
     public void ModifySpeed(int v) {
