@@ -1,10 +1,10 @@
-skeleton.png
+player_2.png
 size:908,404
 filter:Linear,Linear
 pma:true
-player_0_back
+player_2_back
 bounds:2,2,300,400
-player_0_body
+player_2_body
 bounds:304,2,300,400
-player_0_die
+player_2_die
 bounds:606,2,300,400

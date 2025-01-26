@@ -14,7 +14,7 @@ namespace GamePlay
 		/// <summary>
 		/// 準備開始，所有人準備開始後會自動開始
 		/// </summary>
-		void Ready(PlayerData playerData);
+		void Ready(int index);
 		/// <summary>
 		/// 開始，需所有玩家進入準備
 		/// </summary>

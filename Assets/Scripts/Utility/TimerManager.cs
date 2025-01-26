@@ -46,7 +46,7 @@ namespace Utility
 			_waitAddTimers.Clear();
 		}
 
-		public Timer GetTimer(float totalTime)
+		public Timer GetTimer()
 		{
 			var timer = new Timer();
 			_sleepTimers.Add(timer);

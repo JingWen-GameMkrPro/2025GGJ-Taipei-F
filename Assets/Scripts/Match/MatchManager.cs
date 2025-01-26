@@ -39,6 +39,8 @@ namespace GamePlay
 			{
 				//成功時再刷新資料
 				playerData.index = playerID;
+				//TODO: 要做配對狀態的檢查
+				playerData.matchStatus = MatchStatus.NotReady;
 				NotifyJoin(playerID);
 				return;
 			}
@@ -46,18 +48,18 @@ namespace GamePlay
 
 		}
 
-		public void Ready(PlayerData playerData)
+		public void Ready(int index)
 		{
-			var playerID = playerData.index;
+			var playerID = index;
 			if (!_playerDict.TryGetValue(playerID, out var ticket))
 			{
 				_errorHandler.Handle(MatchResult.NotJoin);
 				return;
 			}
-			switch (ticket.MatchStatus)
+			switch (ticket.PlayerData.matchStatus)
 			{
 				case MatchStatus.NotReady:
-					ticket.MatchStatus = MatchStatus.Ready;
+					ticket.PlayerData.matchStatus = MatchStatus.Ready;
 					break;
 				case MatchStatus.Ready:
 					_errorHandler.Handle(MatchResult.AlreadyReady);
@@ -80,12 +82,17 @@ namespace GamePlay
 				_errorHandler.Handle(MatchResult.PlayerNotEnough);
 				return;
 			}
-			var isNotReady = _playerDict.Values.Any(data => data.MatchStatus != MatchStatus.Ready);
+			var isNotReady = _playerDict.Values.Any(data => data.PlayerData.matchStatus != MatchStatus.Ready);
 
 			if (isNotReady)
 			{
 				_errorHandler.Handle(MatchResult.PlayerNotReady);
 				return;
+			}
+
+            foreach (var player in _playerDict.Values)
+            {
+				player.PlayerData.matchStatus = MatchStatus.Battle;
 			}
 
 			_stateManager.ChangeState<BattleState>();

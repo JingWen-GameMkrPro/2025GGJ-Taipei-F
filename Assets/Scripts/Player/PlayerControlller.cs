@@ -2,17 +2,18 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using System.Collections;
+using GamePlay;
+using Utility;
 
 public class PlayerController : MonoBehaviour {
     [SerializeField]
     PlayerData data;
 
-    //TEMP
-    static int indexCount = 0;
-
-
     [Header("Input")]
     PlayerInput playerInput;
+
+    [Header("Behavior")]
+    IPlayerBehavior playerBehavior;
 
     [Header("Character")]
     [SerializeField] CharacterController controller;
@@ -23,8 +24,8 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] List<Transform> firePoints;
 
     [Header("Hint")]
-    [SerializeField] GameObject defenceHint;
-    [SerializeField] GameObject dieHint; 
+    public GameObject defenceHint;
+    public GameObject dieHint; 
 
     private void OnEnable() {
         Setup();
@@ -33,14 +34,18 @@ public class PlayerController : MonoBehaviour {
     void Setup() {
         playerInput = GetComponent<PlayerInput>();
 
-        data = new PlayerData(playerInput.devices[0], indexCount++, this);
+        data = new PlayerData(playerInput.devices[0], -1, this);
 
+        //Regis
+        if(SystemService.TryGetService<IMatchManager>(out IMatchManager matchManager) == false){
+            Destroy(gameObject);
+        }
+        matchManager.Join(data);
+        
         //spriteRenderer.material = playerMat[data.index];
         for (int i = 0; i < characterList.Count; i++) {
             characterList[i].SetActive(i == data.index);
         }
-
-        //Regis
 
         DontDestroyOnLoad(gameObject);
         StartCoroutine(Finish());
@@ -56,39 +61,41 @@ public class PlayerController : MonoBehaviour {
         HandleMove();
     }
 
-    void HandleMove() {
-        if (controller != null) {
-            controller.Move(data.move);
+    void UpdateBehavior(){
+        switch(data.matchStatus){
+            case MatchStatus.NotReady:
+            case MatchStatus.Ready:
+                playerBehavior = new PlayerLobbyBehavior();
+                break;
+            case MatchStatus.Battle:
+                playerBehavior = new PlayerGameBehavior();
+                break;
         }
+    }
 
-        aniControl.UpdateState(data.move, data.faceType);
+    void HandleMove() {
+        UpdateBehavior();
+        playerBehavior.HandleMove(this);
     }
 
     void HandleAttack() {
-        ItemManager.ItemInfo info = new ItemManager.ItemInfo();
-        info.PlayerIndex = data.index;
-        info.Owner = gameObject;
-        info.Position = firePoints[data.faceType].position;
-        info.Direction = data.faceto;
-        info.Speed = 15;
-        ItemManager.Instance.UseItem(info);
+        UpdateBehavior();
+        playerBehavior.HandleAttack(this);
     }
 
     void HandleDamage(int v) {
-        data.ModifyHP(v);
+        UpdateBehavior();
+        playerBehavior.HandleDamage(this, v);
     }
 
     void HandleSpeedModify(int v) {
-        data.ModifySpeed(v);
+        UpdateBehavior();
+        playerBehavior.HandleSpeedModify(this, v);
     }
 
     void HandleHint() {
-        if (defenceHint != null) {
-            defenceHint.SetActive(data.IsDefencing());
-        }
-        if (dieHint != null) {
-            dieHint.SetActive(data.IsDied());
-        }
+        UpdateBehavior();
+        playerBehavior.HandleHint(this);
     }
 
     #region Input
@@ -143,26 +150,20 @@ public class PlayerController : MonoBehaviour {
         return data;
     }
 
+    public CharacterController GetCharacterController(){
+        return controller;
+    }
+    public PlayerAnimation GetPlayerAnimation(){
+        return aniControl;
+    }
+
+    public List<Transform> GetFirePointList(){
+        return firePoints;
+    }
+
     public void TriggerHit(List<ItemManager.InteractType> typeList) {
-        if (data.IsDied() || !data.isInitlized) {
-            return;
-        }
-        foreach (ItemManager.InteractType type in typeList) {
-            switch (type) {
-                case ItemManager.InteractType.Damage:
-                    HandleDamage(-10);
-                    break;
-                case ItemManager.InteractType.Boom:
-                    HandleDamage(-20);
-                    break;
-                case ItemManager.InteractType.SpeedDown:
-                    HandleSpeedModify(-1);
-                    break;
-                case ItemManager.InteractType.SpeedUp:
-                    HandleSpeedModify(1);
-                    break;
-            }
-        }
+        UpdateBehavior();
+        playerBehavior.TriggerHit(this, typeList);
     }
 
     #endregion
@@ -171,6 +172,7 @@ public class PlayerController : MonoBehaviour {
 [SerializeField]
 public class PlayerData{
     public int index;
+    public MatchStatus matchStatus;
     public InputDevice device;
     public int hp;
     public int speed;
@@ -189,7 +191,7 @@ public class PlayerData{
         this.device = device;
         this.index = index;
         this.hp = 100;
-        this.speed = 20;
+        this.speed = 50;
         this.canMove = true;
         this.playerController = playerController;
     }

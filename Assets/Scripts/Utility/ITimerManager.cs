@@ -2,6 +2,6 @@ namespace Utility
 {
 	public interface ITimerManager
 	{
-		Timer GetTimer(float totalTime);
+		Timer GetTimer();
 	}
 }
