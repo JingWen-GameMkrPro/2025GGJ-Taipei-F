@@ -44,6 +44,14 @@ public class PlayerAnimation : MonoBehaviour
         HandldBody();
     }
 
+    public void TriggerDie(){
+        foreach (GameObject obj in bodyList) {
+            if (obj.activeSelf == true && obj.activeInHierarchy == true && obj.GetComponent<Animator>() != null) {
+                obj.GetComponent<Animator>().SetTrigger("die");
+            }
+        }
+    }
+
     void HandleAnimation() {
         foreach (GameObject obj in bodyList) {
             if (obj.activeSelf == true && obj.activeInHierarchy == true && obj.GetComponent<Animator>() != null) {

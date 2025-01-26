@@ -22,12 +22,12 @@ public class PlayerGameBehavior : IPlayerBehavior{
         ItemManager.Instance.UseItem(info);
     }
 
-    public void HandleDamage(PlayerController _pController, int v) {
+    public void HandleDamage(PlayerController _pController, int v, int ownerIndex = -1) {
         if(SystemService.TryGetService<IBattleManager>(out IBattleManager battleManager) == false){
             return;
         }
         _pController.GetPlayerAnimation().PlayHurtAnimation();
-        battleManager.DoDamage(-1, _pController.GetData().index, v);
+        battleManager.DoDamage(ownerIndex, _pController.GetData().index, v);
     }
 
     public void HandleSpeedModify(PlayerController _pController, int v) {
@@ -42,17 +42,17 @@ public class PlayerGameBehavior : IPlayerBehavior{
             _pController.dieHint.SetActive(_pController.GetData().IsDied());
         }
     }
-    public void TriggerHit(PlayerController _pController, List<ItemManager.InteractType> typeList) {
+    public void TriggerHit(PlayerController _pController, List<ItemManager.InteractType> typeList, int ownerIndex) {
         if (_pController.GetData().IsDied() || !_pController.GetData().isInitlized) {
             return;
         }
         foreach (ItemManager.InteractType type in typeList) {
             switch (type) {
                 case ItemManager.InteractType.Damage:
-                    HandleDamage(_pController, -10);
+                    HandleDamage(_pController, -10, ownerIndex);
                     break;
                 case ItemManager.InteractType.Boom:
-                    HandleDamage(_pController, -20);
+                    HandleDamage(_pController, -20, ownerIndex);
                     break;
                 case ItemManager.InteractType.SpeedDown:
                     HandleSpeedModify(_pController, -1);

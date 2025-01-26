@@ -93,16 +93,6 @@ public class PlayerController : MonoBehaviour {
         playerBehavior.HandleAttack(this);
     }
 
-    void HandleDamage(int v) {
-        UpdateBehavior();
-        playerBehavior.HandleDamage(this, v);
-    }
-
-    void HandleSpeedModify(int v) {
-        UpdateBehavior();
-        playerBehavior.HandleSpeedModify(this, v);
-    }
-
     void HandleHint() {
         UpdateBehavior();
         playerBehavior.HandleHint(this);
@@ -173,7 +163,7 @@ public class PlayerController : MonoBehaviour {
 
     public void TriggerHit(List<ItemManager.InteractType> typeList, int ownerIndex = -1) {
         UpdateBehavior();
-        playerBehavior.TriggerHit(this, typeList);
+        playerBehavior.TriggerHit(this, typeList, ownerIndex);
     }
 
     public void UpdatePosition(Vector2 pos){

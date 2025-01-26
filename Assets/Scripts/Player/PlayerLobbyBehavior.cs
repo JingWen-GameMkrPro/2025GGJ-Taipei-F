@@ -30,14 +30,6 @@ public class PlayerLobbyBehavior : IPlayerBehavior
         }
     }
 
-    public void HandleDamage(PlayerController _pController, int v) {
-        /*Do Nothing in Lobby*/
-    }
-
-    public void HandleSpeedModify(PlayerController _pController, int v) {
-        /*Do Nothing in Lobby*/
-    }
-
     public void HandleHint(PlayerController _pController) {
         if (_pController.defenceHint != null) {
             _pController.defenceHint.SetActive(false);
@@ -46,7 +38,7 @@ public class PlayerLobbyBehavior : IPlayerBehavior
             _pController.dieHint.SetActive(false);
         }
     }
-    public void TriggerHit(PlayerController _pController, List<ItemManager.InteractType> typeList) {
+    public void TriggerHit(PlayerController _pController, List<ItemManager.InteractType> typeList, int ownerIndex) {
         /*Do Nothing in Lobby*/
     }
 }
