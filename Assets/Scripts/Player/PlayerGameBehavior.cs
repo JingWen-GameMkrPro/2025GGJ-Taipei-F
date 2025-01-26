@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using GamePlay;
 using UnityEngine;
+using Utility;
 
 public class PlayerGameBehavior : IPlayerBehavior{
     public void HandleMove(PlayerController _pController) {
@@ -21,7 +23,11 @@ public class PlayerGameBehavior : IPlayerBehavior{
     }
 
     public void HandleDamage(PlayerController _pController, int v) {
-        _pController.GetData().ModifyHP(v);
+        if(SystemService.TryGetService<IBattleManager>(out IBattleManager battleManager) == false){
+            return;
+        }
+
+        battleManager.DoDamage(-1, _pController.GetData().index, v);
     }
 
     public void HandleSpeedModify(PlayerController _pController, int v) {
