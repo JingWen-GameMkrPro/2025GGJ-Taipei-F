@@ -46,9 +46,9 @@ namespace GamePlay
 
 		}
 
-		public void Ready(PlayerData playerData)
+		public void Ready(int index)
 		{
-			var playerID = playerData.index;
+			var playerID = index;
 			if (!_playerDict.TryGetValue(playerID, out var ticket))
 			{
 				_errorHandler.Handle(MatchResult.NotJoin);
