@@ -55,16 +55,15 @@ public class ItemManager : MonoBehaviour
     public GameObject BubblePrefab;
 
     //系統生成Icon，可以指定Type
-    public void CreateItemIconInMap(ItemType type)
+    public GameObject CreateItemIconInMap(ItemType type)
     {
         SoundManager.Instance.PlaySoundEffect(SoundEffectType.Emerge);
         switch(type)
         {
             case ItemType.Bubble:
-                Instantiate(BubbleIconPrefab);
-                return;
+                return Instantiate(BubbleIconPrefab);
             default:
-                return;
+                return null;
         }
     }
 
@@ -117,6 +116,8 @@ public class ItemManager : MonoBehaviour
     {
         PlayerItems[index] = new Queue<ItemType>();
     }
+
+
 
 }
 
