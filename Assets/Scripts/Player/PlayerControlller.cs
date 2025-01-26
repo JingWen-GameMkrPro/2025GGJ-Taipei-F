@@ -208,7 +208,7 @@ public class PlayerData{
             move = Vector2.zero;
 
             if(cacheHP != hp){
-                playerController.GetPlayerAnimation().TriggerDie();
+                playerController.GetPlayerAnimation().TriggerDie(); 
             }
         }
     }
@@ -282,5 +282,9 @@ public class PlayerData{
         // 1000000 ticks = 0.1 sec
         long safeDefenceTime = 10000000;
         return System.DateTime.Now.Ticks - lastDefenceTick < safeDefenceTime;
+    }
+
+    public void Respawn(){
+        
     }
 }
