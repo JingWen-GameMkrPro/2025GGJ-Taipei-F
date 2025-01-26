@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,6 +19,25 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] List<GameObject> upArmList;
     [SerializeField] List<GameObject> downArmList;
     [SerializeField] int armType = 0; //0 up 1 down 2 right 3 left
+
+    [SerializeField] [Min(0)] private float hurtTime;
+    [SerializeField] private Color hurtColor;
+    private MeshRenderer _meshRenderer;
+
+    private void Awake()
+    {
+        _meshRenderer = GetComponent<MeshRenderer>();
+    }
+    
+    public void PlayHurtAnimation() {
+        StartCoroutine(Hurt());
+    }
+    
+    private IEnumerator Hurt() {
+        _meshRenderer.material.color = hurtColor;
+        yield return new WaitForSeconds(hurtTime);
+        _meshRenderer.material.color = Color.white;
+    }
 
     public void UpdateState(Vector2 move, int armType) {
         speed = move.magnitude;
