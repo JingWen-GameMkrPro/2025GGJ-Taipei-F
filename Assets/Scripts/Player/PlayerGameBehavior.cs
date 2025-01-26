@@ -20,6 +20,9 @@ public class PlayerGameBehavior : IPlayerBehavior{
         info.Direction = _pController.GetData().faceto;
         info.Speed = 15;
         ItemManager.Instance.UseItem(info);
+        if(SystemService.TryGetService<IBattleManager>(out IBattleManager battleManager) == true){
+            battleManager.UseItem(_pController.GetData().index, info);
+        }
     }
 
     public void HandleDamage(PlayerController _pController, int v, int ownerIndex = -1) {
