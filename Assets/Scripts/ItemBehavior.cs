@@ -39,7 +39,7 @@ public class ItemBehavior: MonoBehaviour
         {
             var types = new List<ItemManager.InteractType>();
             types.Add(ItemManager.InteractType.Boom);
-            player.GetComponent<Player_HitSensor>().controller.TriggerHit(types);
+            player.GetComponent<Player_HitSensor>().controller.TriggerHit(types, ItemInfo.PlayerIndex);
         }
 
         Destroy(this.gameObject);
@@ -68,7 +68,7 @@ public class ItemBehavior: MonoBehaviour
         var types = new List<ItemManager.InteractType>();
         types.Add(ItemManager.InteractType.SpeedDown);
         types.Add(ItemManager.InteractType.Damage);
-        target.TriggerHit(types);
+        target.TriggerHit(types, ItemInfo.PlayerIndex);
 
         Destroy(this.gameObject);
     }
