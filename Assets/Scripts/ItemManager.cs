@@ -60,7 +60,7 @@ public class ItemManager : MonoBehaviour
     //系統生成Icon，可以指定Type
     public GameObject CreateItemIconInMap(ItemType type)
     {
-        SoundManager.Instance.PlaySoundEffect(SoundEffectType.Emerge);
+        SoundManager.Instance.PlaySoundEffect(SoundEffectType.Spawn);
         switch(type)
         {
             case ItemType.Bubble:

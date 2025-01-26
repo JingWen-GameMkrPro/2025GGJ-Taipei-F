@@ -3,10 +3,13 @@ using UnityEngine;
 public enum SoundEffectType
 {
     Walk,
+    Pickup,
     Shoot,
+    Block,
     Explosion,
     Stick,
-    Emerge
+    Spawn,
+    Death
 }
 
 [RequireComponent(typeof(AudioSource))]
