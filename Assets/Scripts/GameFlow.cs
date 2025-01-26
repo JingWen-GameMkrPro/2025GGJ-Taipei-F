@@ -8,7 +8,7 @@ namespace GamePlay
 		public GameFlow(IStateManager stateManager)
 		{
 			//TODO: 釋放空間、SceneName查表
-			stateManager.GetState<MatchState>().OnEnterState += () => ChangeScene("Lobby");
+			stateManager.GetState<MatchState>().OnEnterState += () => ChangeScene("Level02 Lobby");
 			stateManager.GetState<BattleState>().OnEnterState += () => ChangeScene("Level01");
 			stateManager.GetState<ResultState>().OnEnterState += () => ChangeScene("");
 		}

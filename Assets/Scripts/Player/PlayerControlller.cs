@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour {
             Destroy(gameObject);
             return;
         }
-        if(stateManager.CurrentState.GetType() == typeof(BattleState)){
+        if(stateManager.CurrentState != null && stateManager.CurrentState.GetType() == typeof(BattleState)){
             Destroy(gameObject);
             return;
         }
@@ -179,6 +179,11 @@ public class PlayerData{
     public InputDevice device;
     public int hp;
     public int speed;
+    public int ammo {
+        get {
+            return ItemManager.Instance.GetPlayerBubbleCount(index);
+        }
+    }
     public bool canMove;
 
     public Vector2 move = Vector2.zero;
