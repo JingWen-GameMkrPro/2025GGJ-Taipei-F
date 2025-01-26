@@ -923,8 +923,9 @@ MonoBehaviour:
   - {fileID: 1138433665214272423}
   - {fileID: 506855515099132498}
   armType: 3
-  hurtTime: 0
-  hurtColor: {r: 0, g: 0, b: 0, a: 0}
+  hurtTime: 0.3
+  hurtColor: {r: 1, g: 0, b: 0, a: 1}
+  _meshRenderer: {fileID: 0}
 --- !u!1 &5124420007491091911
 GameObject:
   m_ObjectHideFlags: 0

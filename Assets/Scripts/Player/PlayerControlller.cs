@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections;
 using GamePlay;
 using Utility;
+using System;
 
 public class PlayerController : MonoBehaviour {
     [SerializeField]
@@ -32,13 +33,22 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Setup() {
-        playerInput = GetComponent<PlayerInput>();
+        if(SystemService.TryGetService<IStateManager>(out IStateManager stateManager) == false){
+            Destroy(gameObject);
+            return;
+        }
+        if(stateManager.CurrentState.GetType() == typeof(BattleState)){
+            Destroy(gameObject);
+            return;
+        }
 
+        playerInput = GetComponent<PlayerInput>();
         data = new PlayerData(playerInput.devices[0], -1, this);
 
         //Regis
         if(SystemService.TryGetService<IMatchManager>(out IMatchManager matchManager) == false){
             Destroy(gameObject);
+            return;
         }
         matchManager.Join(data);
         

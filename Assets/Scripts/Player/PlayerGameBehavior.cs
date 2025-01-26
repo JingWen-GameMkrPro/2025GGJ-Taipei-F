@@ -26,7 +26,7 @@ public class PlayerGameBehavior : IPlayerBehavior{
         if(SystemService.TryGetService<IBattleManager>(out IBattleManager battleManager) == false){
             return;
         }
-
+        _pController.GetPlayerAnimation().PlayHurtAnimation();
         battleManager.DoDamage(-1, _pController.GetData().index, v);
     }
 

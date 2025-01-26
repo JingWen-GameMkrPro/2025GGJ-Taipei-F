@@ -22,22 +22,6 @@ public class PlayerAnimation : MonoBehaviour
 
     [SerializeField] [Min(0)] private float hurtTime;
     [SerializeField] private Color hurtColor;
-    private MeshRenderer _meshRenderer;
-
-    private void Awake()
-    {
-        _meshRenderer = GetComponent<MeshRenderer>();
-    }
-    
-    public void PlayHurtAnimation() {
-        StartCoroutine(Hurt());
-    }
-    
-    private IEnumerator Hurt() {
-        _meshRenderer.material.color = hurtColor;
-        yield return new WaitForSeconds(hurtTime);
-        _meshRenderer.material.color = Color.white;
-    }
 
     public void UpdateState(Vector2 move, int armType) {
         speed = move.magnitude;
@@ -67,6 +51,27 @@ public class PlayerAnimation : MonoBehaviour
                 obj.GetComponent<Animator>().SetFloat("speed", speed);
             }
         }
+    }
+
+    public void PlayHurtAnimation() {
+        StartCoroutine(Hurt());
+    }
+    
+    private IEnumerator Hurt() {
+        MeshRenderer meshRenderer = null;
+        foreach (GameObject obj in bodyList) {
+            MeshRenderer _meshRenderer = obj.GetComponent<MeshRenderer>();
+            if (obj.activeSelf == true && obj.activeInHierarchy == true && _meshRenderer != null) {
+                meshRenderer = _meshRenderer;
+            }
+        }
+        if(meshRenderer == null){
+            yield break;
+        }
+
+        meshRenderer.material.color = hurtColor;
+        yield return new WaitForSeconds(hurtTime);
+        meshRenderer.material.color = Color.white;
     }
 
     void HandldBody() {
