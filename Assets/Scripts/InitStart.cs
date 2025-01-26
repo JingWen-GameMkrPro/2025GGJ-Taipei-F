@@ -23,5 +23,11 @@ namespace GamePlay
 
 			stateManager.ChangeState<MatchState>();
 		}
+
+		public void StartGame()
+		{
+			SystemService.TryGetService<IStateManager>(out var stateManager);
+			stateManager.ChangeState<MatchState>();
+		}
 	}
 }
