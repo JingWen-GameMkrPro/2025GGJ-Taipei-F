@@ -171,7 +171,7 @@ public class PlayerController : MonoBehaviour {
         return firePoints;
     }
 
-    public void TriggerHit(List<ItemManager.InteractType> typeList) {
+    public void TriggerHit(List<ItemManager.InteractType> typeList, int ownerIndex = -1) {
         UpdateBehavior();
         playerBehavior.TriggerHit(this, typeList);
     }
