@@ -5,16 +5,26 @@ namespace GamePlay
 {
 	public class BattleManager : IBattleManager
 	{
+		private IStateManager _stateManager;
 		private ITimerManager _timerManager;
 		private Timer _battleCountdown;
 		private HashSet<IObserver<TimeInfo>> _countdownObservers = new HashSet<IObserver<TimeInfo>>();
-		public BattleManager(ITimerManager timerManager)
+		public BattleManager(IStateManager stateManager, ITimerManager timerManager)
 		{
+			_stateManager = stateManager;
 			_timerManager = timerManager;
 			_battleCountdown = timerManager.GetTimer();
+
+			_stateManager.GetState<BattleState>().OnEnterState += OnEnterBattle;
 			_battleCountdown.OnUpdate += OnCountdownUpdate;
 		}
-		public void StartBattle()
+
+        private void OnEnterBattle()
+        {
+			StartBattle();
+		}
+
+        public void StartBattle()
 		{
 			_battleCountdown.StartCountdown(99);
 		}
