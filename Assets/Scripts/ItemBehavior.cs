@@ -22,6 +22,8 @@ public class ItemBehavior: MonoBehaviour
     public float LifeTime = 3f;
     float currentLifeTime = 0f;
 
+    public SpriteRenderer renderer;
+
     private void Update()
     {
         currentLifeTime += Time.deltaTime;
@@ -132,7 +134,7 @@ public class ItemBehavior: MonoBehaviour
 
     public void ChangeColor(int index)
     {
-        var renderer = this.gameObject.GetComponent<SpriteRenderer>();
+        //var renderer = this.gameObject.GetComponent<SpriteRenderer>();
 
         switch(index)
         {

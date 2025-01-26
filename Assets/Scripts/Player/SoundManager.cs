@@ -29,7 +29,6 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySoundEffect(SoundEffectType soundEffectType)
     {
-        _audioSource.clip = audioClips[(int)soundEffectType];
-        _audioSource.Play();
+        _audioSource.PlayOneShot(audioClips[(int)soundEffectType]);
     }
 }

@@ -11,8 +11,8 @@ namespace GamePlay
 		{
 			if (SystemService.TryGetService<IBattleManager>(out var battleManager))
 			{
-				//battleManager.StartBattle();
+				battleManager.SetCoordinateAdapter(_coordinateAdapter);
 			}
 		}
-	}
+    }
 }
