@@ -1,0 +1,60 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerGameBehavior : IPlayerBehavior{
+    public void HandleMove(PlayerController _pController) {
+        if (_pController.GetCharacterController() != null) {
+            _pController.GetCharacterController().Move(_pController.GetData().move);
+        }
+
+        _pController.GetPlayerAnimation().UpdateState(_pController.GetData().move, _pController.GetData().faceType);
+    }
+
+    public void HandleAttack(PlayerController _pController) {
+        ItemManager.ItemInfo info = new ItemManager.ItemInfo();
+        info.PlayerIndex = _pController.GetData().index;
+        info.Owner = _pController.gameObject;
+        info.Position = _pController.GetFirePointList()[_pController.GetData().faceType].position;
+        info.Direction = _pController.GetData().faceto;
+        info.Speed = 15;
+        ItemManager.Instance.UseItem(info);
+    }
+
+    public void HandleDamage(PlayerController _pController, int v) {
+        _pController.GetData().ModifyHP(v);
+    }
+
+    public void HandleSpeedModify(PlayerController _pController, int v) {
+        _pController.GetData().ModifySpeed(v);
+    }
+
+    public void HandleHint(PlayerController _pController) {
+        if (_pController.defenceHint != null) {
+            _pController.defenceHint.SetActive(_pController.GetData().IsDefencing());
+        }
+        if (_pController.dieHint != null) {
+            _pController.dieHint.SetActive(_pController.GetData().IsDied());
+        }
+    }
+    public void TriggerHit(PlayerController _pController, List<ItemManager.InteractType> typeList) {
+        if (_pController.GetData().IsDied() || !_pController.GetData().isInitlized) {
+            return;
+        }
+        foreach (ItemManager.InteractType type in typeList) {
+            switch (type) {
+                case ItemManager.InteractType.Damage:
+                    HandleDamage(_pController, -10);
+                    break;
+                case ItemManager.InteractType.Boom:
+                    HandleDamage(_pController, -20);
+                    break;
+                case ItemManager.InteractType.SpeedDown:
+                    HandleSpeedModify(_pController, -1);
+                    break;
+                case ItemManager.InteractType.SpeedUp:
+                    HandleSpeedModify(_pController, 1);
+                    break;
+            }
+        }
+    }
+}
