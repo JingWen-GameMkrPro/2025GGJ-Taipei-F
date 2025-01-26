@@ -13,11 +13,14 @@ namespace GamePlay
 	{
 		private IStateManager _stateManager;
 		private ITimerManager _timerManager;
+		private ICoordinateAdapter _coordinateAdapter;
 		private Timer _battleCountdown;
 		private Dictionary<int, PlayerData> _playerDict;
-		private Dictionary<int, PlayerBattleInfo> _playerBattleInfos = new Dictionary<int, PlayerBattleInfo>();
+		private Dictionary<int, PlayerInfo> _playerBattleInfos = new Dictionary<int, PlayerInfo>();
+		private Dictionary<int, int> _killCount = new Dictionary<int, int>();
 		private Dictionary<int, Timer> _playerRespawnTimers = new Dictionary<int, Timer>();
 		private HashSet<IObserver<TimeInfo>> _countdownObservers = new HashSet<IObserver<TimeInfo>>();
+		private List<IObserver<PlayerInfo>> _playerInfoObservers = new List<IObserver<PlayerInfo>>();
 		public BattleManager(IStateManager stateManager, ITimerManager timerManager)
 		{
 			_stateManager = stateManager;
@@ -46,12 +49,12 @@ namespace GamePlay
 				var playerData = playerKeyValue.Value;
 				playerData.matchStatus = MatchStatus.Battle;
 
-				_playerBattleInfos[playerID] = new PlayerBattleInfo()
+				_playerBattleInfos[playerID] = new PlayerInfo()
 				{
 					//TODO: magic number
-					Hp = playerData.hp,
-					BulletCount = 0,
-					KillCount = 0
+					currentHealth = playerData.hp,
+					ammo = 0,
+					kill = 0
 				};
 				//_playerRespawnTimers[playerID] = _timerManager.GetTimer();
 				//這裡會有問題，需要解註冊
@@ -83,9 +86,44 @@ namespace GamePlay
 			playerData.ModifyHP(damage);
 			if (playerData.IsDied())
 			{
+				_killCount.TryGetValue(attackerIndex, out var killCount);
+				killCount++;
+				_killCount[attackerIndex] = killCount;
 				//TODO Add Kill Count
 				//TODO respawn
+				playerData.Respawn();
+				playerData.playerController.UpdatePosition(_coordinateAdapter.GetPosition(0, 0));
 			}
+
+			UpdatePlayerInfo();
+		}
+
+		public void UpdatePlayerInfo()
+		{
+			foreach (var playerData in _playerDict.Values)
+			{
+				foreach (var observers in _playerInfoObservers)
+				{
+					observers.Update(GetPlayerInfo(playerData));
+				}
+			}
+			
+		}
+
+		private PlayerInfo GetPlayerInfo(PlayerData playerData)
+		{
+			var info = new PlayerInfo();
+			info.index = playerData.index;
+			info.currentHealth = playerData.hp;
+			info.ammo = playerData.ammo;
+			_killCount.TryGetValue(playerData.index, out var killCount);
+			info.kill = killCount;
+			return info;
+		}
+
+		public void SetCoordinateAdapter(ICoordinateAdapter coordinateAdapter)
+		{
+			_coordinateAdapter = coordinateAdapter;
 		}
 
 		public void Register(IObserver<TimeInfo> observer)
@@ -103,6 +141,14 @@ namespace GamePlay
 		public void UseItem(int playerIndex, ItemManager.ItemInfo itemInfo)
 		{
 			throw new System.NotImplementedException();
+		}
+		public void Register(IObserver<PlayerInfo> observer)
+		{
+			_playerInfoObservers.Add(observer);
+		}
+		public void Deregister(IObserver<PlayerInfo> observer)
+		{
+			_playerInfoObservers.Remove(observer);
 		}
 	}
 }
