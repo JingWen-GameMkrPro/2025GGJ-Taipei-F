@@ -111,7 +111,6 @@ namespace GamePlay
 			}
 			_joinObservers.Clear();
 			Debug.Log("Init MacthManager");
-			NotifyJoin();
 		}
 	}
 }
