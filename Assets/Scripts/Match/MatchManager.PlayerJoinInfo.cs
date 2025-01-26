@@ -17,7 +17,7 @@ namespace GamePlay
 		private void NotifyJoin(int playerID)
 		{
 			var ticket = _playerDict[playerID];
-			var index = ticket.PlayerData.index;
+			var index = ticket.index;
 			if (index >= 0 && index < _joinObservers.Count)
 			{
 				var observer = _joinObservers[index];
@@ -25,7 +25,7 @@ namespace GamePlay
 				observer.Update(joinInfo);
 			}
 		}
-		private PlayerJoinInfo GetPlayerJoinInfo(MatchTicket<PlayerData> ticket)
+		private PlayerJoinInfo GetPlayerJoinInfo(PlayerData ticket)
 		{
 			var joinInfo = new PlayerJoinInfo();
 			//TODO: don't use magic number

@@ -10,7 +10,7 @@ namespace GamePlay
 		//TODO: 最低開賽人數，2個?
 		//TODO: 人數上限
 		private readonly int MinPlayerCount = 2;
-		private Dictionary<int, MatchTicket<PlayerData>> _playerDict = new Dictionary<int, MatchTicket<PlayerData>>();
+		private Dictionary<int, PlayerData> _playerDict = new Dictionary<int, PlayerData>();
 		private MatchErrorHandler _errorHandler = new MatchErrorHandler();
 		private IStateManager _stateManager;
 		//private List<IObserver<PlayerInfo>> _infoObservers;
@@ -28,14 +28,14 @@ namespace GamePlay
 
 		public void Join(PlayerData playerData)
 		{
-			if (_playerDict.Values.Select(ticket => ticket.PlayerData).Contains(playerData))
+			if (_playerDict.Values.Contains(playerData))
 			{
 				_errorHandler.Handle(MatchResult.AlreadyJoin);
 				return;
 			}
 			//TODO: 優化Ticket生成
 			var playerID = GeneratePlayerID();
-			if (_playerDict.TryAdd(playerID, new MatchTicket<PlayerData>() { PlayerData = playerData }))
+			if (_playerDict.TryAdd(playerID, playerData))
 			{
 				//成功時再刷新資料
 				playerData.index = playerID;
@@ -56,10 +56,10 @@ namespace GamePlay
 				_errorHandler.Handle(MatchResult.NotJoin);
 				return;
 			}
-			switch (ticket.PlayerData.matchStatus)
+			switch (ticket.matchStatus)
 			{
 				case MatchStatus.NotReady:
-					ticket.PlayerData.matchStatus = MatchStatus.Ready;
+					ticket.matchStatus = MatchStatus.Ready;
 					break;
 				case MatchStatus.Ready:
 					_errorHandler.Handle(MatchResult.AlreadyReady);
@@ -82,7 +82,7 @@ namespace GamePlay
 				_errorHandler.Handle(MatchResult.PlayerNotEnough);
 				return;
 			}
-			var isNotReady = _playerDict.Values.Any(data => data.PlayerData.matchStatus != MatchStatus.Ready);
+			var isNotReady = _playerDict.Values.Any(data => data.matchStatus != MatchStatus.Ready);
 
 			if (isNotReady)
 			{
@@ -90,13 +90,10 @@ namespace GamePlay
 				return;
 			}
 
-            foreach (var player in _playerDict.Values)
-            {
-				player.PlayerData.matchStatus = MatchStatus.Battle;
-			}
-
 			_stateManager.ChangeState<BattleState>();
 			//TODO: 進入遊戲
+			SystemService.TryGetService<IBattleManager>(out var battleManager);
+			battleManager.StartBattle(_playerDict);
 		}
 		private void Init()
 		{
