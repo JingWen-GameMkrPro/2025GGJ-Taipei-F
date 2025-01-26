@@ -54,10 +54,10 @@ namespace GamePlay
 				_errorHandler.Handle(MatchResult.NotJoin);
 				return;
 			}
-			switch (ticket.MatchStatus)
+			switch (ticket.PlayerData.matchStatus)
 			{
 				case MatchStatus.NotReady:
-					ticket.MatchStatus = MatchStatus.Ready;
+					ticket.PlayerData.matchStatus = MatchStatus.Ready;
 					break;
 				case MatchStatus.Ready:
 					_errorHandler.Handle(MatchResult.AlreadyReady);
@@ -80,12 +80,17 @@ namespace GamePlay
 				_errorHandler.Handle(MatchResult.PlayerNotEnough);
 				return;
 			}
-			var isNotReady = _playerDict.Values.Any(data => data.MatchStatus != MatchStatus.Ready);
+			var isNotReady = _playerDict.Values.Any(data => data.PlayerData.matchStatus != MatchStatus.Ready);
 
 			if (isNotReady)
 			{
 				_errorHandler.Handle(MatchResult.PlayerNotReady);
 				return;
+			}
+
+            foreach (var player in _playerDict.Values)
+            {
+				player.PlayerData.matchStatus = MatchStatus.Battle;
 			}
 
 			_stateManager.ChangeState<BattleState>();
