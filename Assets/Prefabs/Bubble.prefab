@@ -156,6 +156,7 @@ MonoBehaviour:
   RB: {fileID: 0}
   Animator: {fileID: 0}
   BoomEffect: {fileID: 7759447654436053639, guid: 23a12bd71ea9c4e4aad72820e7e09cbc, type: 3}
+  LifeTime: 3
 --- !u!61 &-3427985670394225570
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -200,7 +201,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.5, y: 1.5}
   m_EdgeRadius: 0
 --- !u!1001 &6096679670836113311
 PrefabInstance:
@@ -212,11 +213,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -554415829915685581, guid: 217108c11b00c3342bf0ddfddded2775, type: 3}
       propertyPath: m_Size.x
-      value: 3
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -554415829915685581, guid: 217108c11b00c3342bf0ddfddded2775, type: 3}
       propertyPath: m_Size.y
-      value: 3
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -554415829915685581, guid: 217108c11b00c3342bf0ddfddded2775, type: 3}
       propertyPath: m_IsTrigger
