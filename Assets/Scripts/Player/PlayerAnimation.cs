@@ -117,4 +117,8 @@ public class PlayerAnimation : MonoBehaviour
             bodyList[i].transform.localEulerAngles = new Vector3(0, isLeft? 0 : 180, 0);
         }
     }
+
+    public void step(){
+        Debug.Log("step!");
+    }
 }
